@@ -12,14 +12,43 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="vukan.com.euprava.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/nav_doctor"
+        android:name="vukan.com.euprava.ui.doctor.ChosenDoctorFragment"
+        android:label="@string/menu_doctor"
+        tools:layout="@layout/fragment_chosen_doctor" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="vukan.com.euprava.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/nav_help"
+        android:name="vukan.com.euprava.ui.help.HelpFragment"
+        android:label="@string/menu_help"
+        tools:layout="@layout/fragment_help" />
+
+    <fragment
+        android:id="@+id/nav_lbo"
+        android:name="vukan.com.euprava.ui.login.lbo.LoginLBOFragment"
+        android:label="@string/menu_lbo"
+        tools:layout="@layout/fragment_login_lbo" />
+    <fragment
+        android:id="@+id/nav_phone_number"
+        android:name="vukan.com.euprava.ui.login.phone_number.LoginPhoneNumberFragment"
+        android:label="@string/phone_number"
+        tools:layout="@layout/fragment_login_phone_number" />
+
+    <fragment
+        android:id="@+id/nav_report"
+        android:name="vukan.com.euprava.ui.report.ReportFragment"
+        android:label="@string/report"
+        tools:layout="@layout/fragment_report" />
+
+    <fragment
+        android:id="@+id/nav_login_BZK"
+        android:name="vukan.com.euprava.ui.login.bzk.LoginBZKFragment"
+        android:label="@string/bzk"
+        tools:layout="@layout/fragment_login_bzk" />
+
+    <fragment
+        android:id="@+id/nav_scheduling_examination"
+        android:name="vukan.com.euprava.ui.examination.SchedulingExaminationFragment"
+        android:label="@string/scheduling_examination"
+        tools:layout="@layout/fragment_scheduling_examination" />
 </navigation>

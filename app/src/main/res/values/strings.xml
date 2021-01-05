@@ -1,13 +1,18 @@
 <resources>
-    <string name="app_name">eUprava</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="app_name">eLekar</string>
+    <string name="navigation_drawer_open">Otvorite navigacioni meni</string>
+    <string name="navigation_drawer_close">Zatvorite navigacioni meni</string>
+    <string name="nav_header_title">eLekar</string>
+    <string name="nav_header_subtitle">Zakazivanje pregleda</string>
+    <string name="nav_header_desc">Navigaciono zaglavlje</string>
+    <string name="menu_home">Lista pregleda</string>
+    <string name="menu_doctor">Izabrani lekar</string>
+    <string name="menu_help">Pomoć</string>
+    <string name="menu_logout">Odjava</string>
     <string name="fab">fab</string>
+    <string name="menu_lbo">Unesite vaš LBO</string>
+    <string name="phone_number">Unesite broj mobilnog telefona</string>
+    <string name="report">Izveštaj</string>
+    <string name="bzk">Unesite vaš BZK</string>
+    <string name="scheduling_examination">Zakažite pregled</string>
 </resources>
