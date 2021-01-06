@@ -15,4 +15,10 @@
     <string name="report">Izveštaj</string>
     <string name="bzk">Unesite vaš BZK</string>
     <string name="scheduling_examination">Zakažite pregled</string>
+    <string name="help_text">
+        Zakažite svoj termin kod izabranog lekara u nekoliko koraka i uštedite vreme!
+        Nakon uspešne prijave na mobilnoj aplikaciji, možete pristupiti listi svojih izabranih lekara. Izborom
+        odgovarajućeg lekara i klikom na Zakaži pregled pristupate kalendaru aktivnosti Vašeg izabranog lekara.
+        Odaberite odgovarajući datum i klikom na slobodni termin isti rezervišite.
+    </string>
 </resources>

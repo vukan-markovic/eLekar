@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import vukan.com.euprava.R
 
 class ChosenDoctorFragment : Fragment() {
-
     private lateinit var chosenDoctorViewModel: ChosenDoctorViewModel
 
     override fun onCreateView(
@@ -17,13 +16,15 @@ class ChosenDoctorFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        chosenDoctorViewModel =
-            ViewModelProvider(this).get(ChosenDoctorViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_chosen_doctor, container, false)
+        return inflater.inflate(R.layout.fragment_chosen_doctor, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        chosenDoctorViewModel = ViewModelProvider(this).get(ChosenDoctorViewModel::class.java)
 
         chosenDoctorViewModel.text.observe(viewLifecycleOwner, {
 
         })
-        return root
     }
 }

@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import vukan.com.euprava.R
 
 class SchedulingExaminationFragment : Fragment() {
-
     private lateinit var schedulingExaminationViewModel: SchedulingExaminationViewModel
 
     override fun onCreateView(
@@ -18,13 +16,17 @@ class SchedulingExaminationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.fragment_scheduling_examination, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         schedulingExaminationViewModel =
             ViewModelProvider(this).get(SchedulingExaminationViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_scheduling_examination, container, false)
 
-        schedulingExaminationViewModel.text.observe(viewLifecycleOwner, Observer {
+        schedulingExaminationViewModel.text.observe(viewLifecycleOwner, {
 
         })
-        return root
     }
 }
