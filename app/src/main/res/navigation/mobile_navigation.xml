@@ -12,14 +12,6 @@
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_nav_home_to_nav_report"
-            app:destination="@id/nav_report"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-
-        <action
             android:id="@+id/action_nav_home_to_nav_scheduling_examination"
             app:destination="@id/nav_scheduling_examination"
             app:enterAnim="@anim/nav_default_enter_anim"
@@ -52,7 +44,7 @@
     <fragment
         android:id="@+id/nav_login_lbo"
         android:name="vukan.com.euprava.ui.login.lbo.LoginLBOFragment"
-        android:label="@string/menu_lbo"
+        android:label="@string/lbo"
         tools:layout="@layout/fragment_login_lbo">
 
         <action
@@ -66,9 +58,8 @@
 
     <fragment
         android:id="@+id/nav_login_phone_number"
-        android:name="vukan.com.euprava.ui.login.phone_number.LoginPhoneNumberFragment"
-        android:label="@string/phone_number"
-        tools:layout="@layout/fragment_login_phone_number">
+        android:name="vukan.com.euprava.ui.login.firebase.LoginFirebaseFragment"
+        android:label="@string/phone_number">
 
         <action
             android:id="@+id/action_nav_login_phone_number_to_nav_home"
@@ -80,12 +71,6 @@
             app:popUpTo="@+id/main_fragment"
             app:popUpToInclusive="true" />
     </fragment>
-
-    <fragment
-        android:id="@+id/nav_report"
-        android:name="vukan.com.euprava.ui.report.ReportFragment"
-        android:label="@string/report"
-        tools:layout="@layout/fragment_report" />
 
     <fragment
         android:id="@+id/nav_login_BZK"

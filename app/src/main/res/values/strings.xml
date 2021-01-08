@@ -9,8 +9,8 @@
     <string name="menu_doctor">Izabrani lekar</string>
     <string name="menu_help">Pomoć</string>
     <string name="menu_logout">Odjava</string>
-    <string name="fab">fab</string>
-    <string name="menu_lbo">Unesite vaš LBO</string>
+    <string name="fab">Zakažite pregled</string>
+    <string name="lbo">Unesite vaš LBO</string>
     <string name="phone_number">Unesite broj mobilnog telefona</string>
     <string name="report">Izveštaj</string>
     <string name="bzk">Unesite vaš BZK</string>
@@ -21,4 +21,17 @@
         odgovarajućeg lekara i klikom na Zakaži pregled pristupate kalendaru aktivnosti Vašeg izabranog lekara.
         Odaberite odgovarajući datum i klikom na slobodni termin isti rezervišite.
     </string>
+    <string name="lbo_help">Šta predstavlja LBO i gde ga mogu pronaći?</string>
+    <string name="next">Dalje</string>
+    <string name="lbo_image">LBO slika</string>
+    <string name="app_icon">Ikonica aplikacije</string>
+    <string name="lbo_hint">Unesite vaš LBO</string>
+    <string name="bzk_help">Šta predstavlja broj kartice zdravstvenog osiguranja (BZK) i gde ga mogu pronaći?</string>
+    <string name="bzk_hint">Unesite vaš BZK</string>
+    <string name="confirm">Potvrdi</string>
+    <string name="privacy_policy">Saglasan/a sam sa pravima i uslovima korišćenja</string>
+    <string name="verification_code">Unesite vaš verifikacioni kod</string>
+    <string name="menu_delete">Brisanje naloga</string>
+    <string name="chose_time">Izaberite vreme</string>
+    <string name="chose_date">Izaberite datum</string>
 </resources>

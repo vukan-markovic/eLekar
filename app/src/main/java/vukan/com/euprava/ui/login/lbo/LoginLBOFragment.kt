@@ -5,23 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import vukan.com.euprava.R
+import androidx.fragment.app.viewModels
+import vukan.com.euprava.databinding.FragmentLoginLboBinding
 
 class LoginLBOFragment : Fragment() {
-    private lateinit var loginLBOViewModel: LoginLBOViewModel
+    private val loginLBOViewModel by viewModels<LoginLBOViewModel>()
+    private lateinit var binding: FragmentLoginLboBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_login_lbo, container, false)
+    ): View {
+        binding = FragmentLoginLboBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loginLBOViewModel = ViewModelProvider(this).get(LoginLBOViewModel::class.java)
 
         loginLBOViewModel.text.observe(viewLifecycleOwner, {
 

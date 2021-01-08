@@ -5,25 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import vukan.com.euprava.R
+import androidx.fragment.app.viewModels
+import vukan.com.euprava.databinding.FragmentSchedulingExaminationBinding
 
 class SchedulingExaminationFragment : Fragment() {
-    private lateinit var schedulingExaminationViewModel: SchedulingExaminationViewModel
+    private val schedulingExaminationViewModel by viewModels<SchedulingExaminationViewModel>()
+    private lateinit var binding: FragmentSchedulingExaminationBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_scheduling_examination, container, false)
+    ): View {
+        binding = FragmentSchedulingExaminationBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        schedulingExaminationViewModel =
-            ViewModelProvider(this).get(SchedulingExaminationViewModel::class.java)
 
         schedulingExaminationViewModel.text.observe(viewLifecycleOwner, {
 

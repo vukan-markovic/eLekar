@@ -2,19 +2,26 @@
   <dictionary name="Win7">
     <words>
       <w>aktivnosti</w>
+      <w>aplikacije</w>
       <w>aplikaciji</w>
+      <w>brisanje</w>
       <w>broj</w>
+      <w>dalje</w>
       <w>euprava</w>
       <w>fresca</w>
+      <w>ikonica</w>
       <w>isti</w>
+      <w>izaberite</w>
       <w>izabrani</w>
       <w>izabranih</w>
       <w>izabranog</w>
       <w>izborom</w>
       <w>izveštaj</w>
       <w>kalendaru</w>
+      <w>kartice</w>
       <w>klikom</w>
       <w>koraka</w>
+      <w>korišćenja</w>
       <w>lekar</w>
       <w>lekara</w>
       <w>lista</w>
@@ -22,8 +29,10 @@
       <w>meni</w>
       <w>mobilnog</w>
       <w>mobilnoj</w>
+      <w>mogu</w>
       <w>možete</w>
       <w>nakon</w>
+      <w>naloga</w>
       <w>navigacioni</w>
       <w>navigaciono</w>
       <w>nekoliko</w>
@@ -31,14 +40,21 @@
       <w>odgovarajućeg</w>
       <w>odgovarajući</w>
       <w>odjava</w>
+      <w>osiguranja</w>
       <w>otvorite</w>
       <w>pomoć</w>
+      <w>potvrdi</w>
+      <w>pravima</w>
+      <w>predstavlja</w>
       <w>pregled</w>
       <w>pregleda</w>
       <w>prijave</w>
       <w>pristupate</w>
       <w>pristupiti</w>
+      <w>pronaći</w>
       <w>rezervišite</w>
+      <w>saglasan</w>
+      <w>slika</w>
       <w>slobodni</w>
       <w>svoj</w>
       <w>svojih</w>
@@ -46,9 +62,11 @@
       <w>termin</w>
       <w>unesite</w>
       <w>uprava</w>
+      <w>uslovima</w>
       <w>uspešne</w>
       <w>uštedite</w>
       <w>vašeg</w>
+      <w>verifikacioni</w>
       <w>vreme</w>
       <w>vukan</w>
       <w>zaglavlje</w>
@@ -56,6 +74,7 @@
       <w>zakaži</w>
       <w>zakažite</w>
       <w>zatvorite</w>
+      <w>zdravstvenog</w>
     </words>
   </dictionary>
 </component>
