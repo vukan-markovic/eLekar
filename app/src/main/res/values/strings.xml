@@ -34,4 +34,13 @@
     <string name="menu_delete">Brisanje naloga</string>
     <string name="chose_time">Izaberite vreme</string>
     <string name="chose_date">Izaberite datum</string>
+    <string name="chose_term">Izaberite termin</string>
+    <string name="doctor_image">Doctor image</string>
+    <string name="date_image">Date image</string>
+    <string name="time_image">Time image</string>
+    <string name="title_help">eLEKAR ANDROID MOBILNA APLIKACIJA</string>
+    <string name="no_examination">Trenutno nemate zakazanih pregleda!</string>
+    <string name="lbo_help_text">LBO</string>
+    <string name="bzk_help_text">BZK</string>
+    <string name="invalid_bzk">BZK nije validan!</string>
 </resources>

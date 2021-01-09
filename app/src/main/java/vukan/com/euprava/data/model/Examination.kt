@@ -1,10 +1,10 @@
 package vukan.com.euprava.data.model
 
-import java.util.*
+import com.google.firebase.Timestamp
 
 data class Examination(
     val examinationID: String,
-    val dateTime: Date,
+    val dateTime: Timestamp,
     val additionalNotes: String,
     val status: Boolean,
     val doctorID: String,

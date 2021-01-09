@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.bzk.LoginBZKFragment">
 
+    <TextView
+        android:id="@+id/doctor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/date_picker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Vukan Marković" />
+
     <Button
         android:id="@+id/date_picker"
         android:layout_width="wrap_content"

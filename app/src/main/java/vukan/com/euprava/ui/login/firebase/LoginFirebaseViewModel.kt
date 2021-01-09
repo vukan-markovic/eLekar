@@ -1,16 +1,12 @@
 package vukan.com.euprava.ui.login.firebase
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import vukan.com.euprava.data.Repository
 
 class LoginFirebaseViewModel : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val repo: Repository = Repository()
 
     fun addUser() {
-
+        repo.addUser()
     }
 }

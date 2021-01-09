@@ -79,23 +79,5 @@ class LoginFirebaseFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         mFirebaseAuth.addAuthStateListener(mAuthStateListener!!)
-
-//        Builder(this)
-//            .setTitle(R.string.delete_account)
-//            .setMessage(R.string.confirm)
-//            .setPositiveButton(android.R.string.yes) { dialog, which ->
-//                myAdsViewModel.deleteUserData(mFirebaseUser!!.uid)
-//                AuthUI.getInstance().delete(this)
-//                    .addOnCompleteListener { task: Task<Void?>? ->
-//                        Toast.makeText(
-//                            this,
-//                            R.string.account_deleted,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//            }
-//            .setNegativeButton(android.R.string.no, null)
-//            .setIcon(R.drawable.ic_delete)
-//            .show()
     }
 }

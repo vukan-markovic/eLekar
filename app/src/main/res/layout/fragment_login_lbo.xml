@@ -2,7 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,14 +20,13 @@
             app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@drawable/ic_launcher_foreground" />
 
         <TextView
             android:id="@+id/app_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
-            android:fontFamily="@font/fresca"
             android:text="@string/app_name"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,25 +34,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/lbo_input"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlined_lbo"
+            style="@style/Widget.App.TextInputLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:autofillHints="@string/lbo"
-            android:fontFamily="@font/fresca"
             android:hint="@string/lbo_hint"
-            android:inputType="number"
-            android:textAlignment="center"
-            android:textSize="20sp"
+            app:counterMaxLength="20"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lbo_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="@string/lbo"
+                android:inputType="number"
+                android:maxLength="20"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/lbo_help"
@@ -59,10 +69,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/lbo_help"
+            android:textColor="@android:color/holo_blue_dark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbo_input" />
+            app:layout_constraintTop_toBottomOf="@+id/outlined_lbo" />
 
         <ImageView
             android:id="@+id/lbo_image"
@@ -76,7 +87,8 @@
             app:layout_constraintTop_toBottomOf="@+id/lbo_help"
             app:srcCompat="@drawable/lbo" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
+
             android:id="@+id/next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
