@@ -12,22 +12,19 @@ import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
-import com.google.firebase.auth.FirebaseUser
 import vukan.com.euprava.R
 import vukan.com.euprava.databinding.FragmentLoginFirebaseBinding
 
 
 class LoginFirebaseFragment : Fragment() {
+    private val firebaseAuth = FirebaseAuth.getInstance()
+    private var authStateListener: AuthStateListener? = null
+    private val loginFirebaseViewModel by viewModels<LoginFirebaseViewModel>()
+    private lateinit var binding: FragmentLoginFirebaseBinding
 
     companion object {
         private const val RC_SIGN_IN = 1
     }
-
-    private val mFirebaseAuth = FirebaseAuth.getInstance()
-    private var mAuthStateListener: AuthStateListener? = null
-    private var mFirebaseUser: FirebaseUser? = null
-    private val loginFirebaseViewModel by viewModels<LoginFirebaseViewModel>()
-    private lateinit var binding: FragmentLoginFirebaseBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,22 +38,22 @@ class LoginFirebaseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAuthStateListener = AuthStateListener { firebaseAuth: FirebaseAuth ->
-            mFirebaseUser = firebaseAuth.currentUser
-
-            if (mFirebaseUser == null) {
-                startActivityForResult(
-                    AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(listOf())
-                        .setLogo(R.mipmap.ic_launcher)
-                        .setTosAndPrivacyPolicyUrls(
-                            "https://example.com/terms.html",
-                            "https://example.com/privacy.html"
+        authStateListener = AuthStateListener {
+            startActivityForResult(
+                AuthUI.getInstance()
+                    .createSignInIntentBuilder()
+                    .setAvailableProviders(
+                        listOf(
+                            AuthUI.IdpConfig.EmailBuilder().build(),
+                            AuthUI.IdpConfig.PhoneBuilder().build()
                         )
-                        .build(), RC_SIGN_IN
-                )
-            }
+                    )
+                    .setLogo(R.mipmap.ic_launcher)
+                    .setTosAndPrivacyPolicyUrls(
+                        "https://sites.google.com/view/elekar-terms-and-conditions",
+                        "https://sites.google.com/view/elekar-privacy-policy"
+                    ).build(), RC_SIGN_IN
+            )
         }
     }
 
@@ -73,11 +70,11 @@ class LoginFirebaseFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
-        if (mAuthStateListener != null) mFirebaseAuth.removeAuthStateListener(mAuthStateListener!!)
+        if (authStateListener != null) firebaseAuth.removeAuthStateListener(authStateListener!!)
     }
 
     override fun onResume() {
         super.onResume()
-        mFirebaseAuth.addAuthStateListener(mAuthStateListener!!)
+        firebaseAuth.addAuthStateListener(authStateListener!!)
     }
 }

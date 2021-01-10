@@ -63,7 +63,7 @@ class LoginLBOFragment : Fragment() {
 
         binding.lboHelp.setOnClickListener {
             AlertDialog.Builder(context)
-                .setTitle(R.string.lbo_help)
+                .setTitle(R.string.lbo_help_title)
                 .setMessage(R.string.lbo_help_text)
                 .setPositiveButton(android.R.string.ok, null)
                 .setIcon(android.R.drawable.ic_menu_info_details)

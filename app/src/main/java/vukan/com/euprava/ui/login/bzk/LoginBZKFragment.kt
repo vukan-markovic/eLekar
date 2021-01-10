@@ -56,7 +56,7 @@ class LoginBZKFragment : Fragment() {
 
         binding.next.setOnClickListener {
             findNavController().navigate(
-                LoginBZKFragmentDirections.actionNavLoginBZKToNavLoginPhoneNumber(
+                LoginBZKFragmentDirections.actionNavLoginBZKToNavLoginFirebase(
                     arrayOf(
                         binding.inputBzk.text.toString(),
                         LoginBZKFragmentArgs.fromBundle(requireArguments()).lbo
@@ -67,7 +67,7 @@ class LoginBZKFragment : Fragment() {
 
         binding.bzkHelp.setOnClickListener {
             AlertDialog.Builder(context)
-                .setTitle(R.string.bzk_help)
+                .setTitle(R.string.bzk_help_title)
                 .setMessage(R.string.bzk_help_text)
                 .setPositiveButton(android.R.string.ok, null)
                 .setIcon(android.R.drawable.ic_menu_info_details)

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/nav_home">
 
     <fragment
         android:id="@+id/nav_home"
@@ -19,9 +19,15 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
-        <argument
-            android:name="lbo_bzk"
-            app:argType="string[]" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_login_lbo"
+            app:destination="@id/nav_login_lbo"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/nav_login_lbo"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -63,10 +69,10 @@
     <fragment
         android:id="@+id/nav_login_firebase"
         android:name="vukan.com.euprava.ui.login.firebase.LoginFirebaseFragment"
-        android:label="@string/phone_number">
+        android:label="@string/login">
 
         <action
-            android:id="@+id/action_nav_login_phone_number_to_nav_home"
+            android:id="@+id/action_nav_login_firebase_to_nav_home"
             app:destination="@id/nav_home"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

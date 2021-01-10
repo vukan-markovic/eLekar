@@ -10,9 +10,9 @@ class LoginLBOViewModel : ViewModel() {
     val formState: LiveData<LBOState> = _form
     private var lboError: Int? = 0
 
-    fun checkLBO(name: String) {
-        if (name.isBlank()) {
-            lboError = R.string.invalid_bzk
+    fun checkLBO(lbo: String) {
+        if (lbo.isBlank()) {
+            lboError = R.string.invalid_lbo
             setFormState()
         } else {
             lboError = null

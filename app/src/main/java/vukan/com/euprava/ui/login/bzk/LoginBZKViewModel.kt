@@ -10,8 +10,8 @@ class LoginBZKViewModel : ViewModel() {
     val formState: LiveData<BZKState> = _form
     private var bzkError: Int? = 0
 
-    fun checkBZK(name: String) {
-        if (name.isBlank()) {
+    fun checkBZK(bzk: String) {
+        if (bzk.isBlank()) {
             bzkError = R.string.invalid_bzk
             setFormState()
         } else {

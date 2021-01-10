@@ -24,8 +24,6 @@ class ChosenDoctorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        chosenDoctorViewModel.text.observe(viewLifecycleOwner, {
-
-        })
+        chosenDoctorViewModel.getDoctors("")
     }
 }

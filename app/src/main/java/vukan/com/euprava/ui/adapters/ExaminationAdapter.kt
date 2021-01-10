@@ -11,7 +11,7 @@ class ExaminationAdapter : RecyclerView.Adapter<ExaminationAdapter.ExaminationVi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExaminationViewHolder {
         return ExaminationViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.fragment_home,
+                R.layout.examination_item,
                 parent,
                 false
             )

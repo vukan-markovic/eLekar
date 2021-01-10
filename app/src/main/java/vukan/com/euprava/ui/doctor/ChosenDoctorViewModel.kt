@@ -1,13 +1,12 @@
 package vukan.com.euprava.ui.doctor
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import vukan.com.euprava.data.Repository
 
 class ChosenDoctorViewModel : ViewModel() {
+    private val repo: Repository = Repository()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun getDoctors(userID: String) {
+        repo.getDoctors(userID)
     }
-    val text: LiveData<String> = _text
 }

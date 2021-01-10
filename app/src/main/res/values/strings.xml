@@ -11,15 +11,17 @@
     <string name="menu_logout">Odjava</string>
     <string name="fab">Zakažite pregled</string>
     <string name="lbo">Unesite vaš LBO</string>
-    <string name="phone_number">Unesite broj mobilnog telefona</string>
+    <string name="login">Prijavljivanje</string>
     <string name="report">Izveštaj</string>
     <string name="bzk">Unesite vaš BZK</string>
     <string name="scheduling_examination">Zakažite pregled</string>
     <string name="help_text">
-        Zakažite svoj termin kod izabranog lekara u nekoliko koraka i uštedite vreme!
+        Mobilna aplikacija služi za zakazivanje pregleda kod izabranog lekara. Da bi ste koristili usluge mobilne aplikacije
+        najpre se morate identifikovati unosom LBO-a i Broj Kartice Zdravstvenog osiguranja (BZK).
         Nakon uspešne prijave na mobilnoj aplikaciji, možete pristupiti listi svojih izabranih lekara. Izborom
         odgovarajućeg lekara i klikom na Zakaži pregled pristupate kalendaru aktivnosti Vašeg izabranog lekara.
-        Odaberite odgovarajući datum i klikom na slobodni termin isti rezervišite.
+        Odaberite odgovarajući datum i klikom na slobodni termin isti rezervišite. Nakon toga možete pristupiti listi budućih
+        zakazanih pregleda kod izabranog lekara.
     </string>
     <string name="lbo_help">Šta predstavlja LBO i gde ga mogu pronaći?</string>
     <string name="next">Dalje</string>
@@ -40,7 +42,20 @@
     <string name="time_image">Time image</string>
     <string name="title_help">eLEKAR ANDROID MOBILNA APLIKACIJA</string>
     <string name="no_examination">Trenutno nemate zakazanih pregleda!</string>
-    <string name="lbo_help_text">LBO</string>
-    <string name="bzk_help_text">BZK</string>
+    <string name="lbo_help_title">LBO</string>
+    <string name="bzk_help_title">BZK</string>
+    <string name="lbo_help_text">
+        Lični broj osiguranika (LBO) određuje se svakom osiguraniku prilikom prijave
+        zdravstvenog osiguranja u matičnoj filijali. LBO sadrži 11 cifara, određuje se osiguraniku samo jednom - trajno i
+        isti je nepromenljiv. Isti se nalazi na zdravstvenoj knjižici.</string>
+    <string name="bzk_help_text">
+        Broj kartice zdravstvenog osiguranja (BZK) određuje se prilikom izdavanja same kartice od strane matične filijale.
+        Isti se nalazi na poleđini kartice zdravstvenog osiguranja na strani gde se nalazi i ČIP.
+    </string>
     <string name="invalid_bzk">BZK nije validan!</string>
+    <string name="invalid_lbo">LBO nije validan!</string>
+    <string name="account_deleted">Nalog je obrisan!</string>
+    <string name="logout">Odjavljeni ste</string>
+    <string name="invalid_date">Pregled možete zakazati samo radnim danima!</string>
+    <string name="delete_account">Da li ste sigurni da želite da izbrišete vaš nalog?</string>
 </resources>

@@ -6,19 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import vukan.com.euprava.databinding.FragmentHomeBinding
 import vukan.com.euprava.ui.adapters.ExaminationAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private val homeViewModel by viewModels<HomeViewModel>()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: ExaminationAdapter
-    private var sfd: SimpleDateFormat? = null
+    private var sfd = SimpleDateFormat("dd-MM-yyyy, HH:mm", Locale.getDefault())
+    private var firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,12 +34,16 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (firebaseUser == null)
+            findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavLoginLbo())
+
         binding.recyclerViewHome.setHasFixedSize(true)
-        binding.recyclerViewHome.layoutManager = GridLayoutManager(context, 2)
+        binding.recyclerViewHome.layoutManager = LinearLayoutManager(context)
         adapter = ExaminationAdapter()
         binding.recyclerViewHome.adapter = adapter
         binding.swipeContainer.setOnRefreshListener(this)
-        sfd = SimpleDateFormat("dd-MM-yyyy, HH:mm", Locale.getDefault())
+
         binding.swipeContainer.setColorSchemeResources(
             android.R.color.holo_purple,
             android.R.color.holo_blue_dark,
@@ -48,10 +55,6 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             binding.swipeContainer.isRefreshing = true
             loadRecyclerViewData()
         }
-
-        homeViewModel.text.observe(viewLifecycleOwner, {
-
-        })
     }
 
     override fun onRefresh() {
@@ -61,7 +64,9 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     private fun loadRecyclerViewData() {
         binding.swipeContainer.isRefreshing = true
 
+        homeViewModel.getExaminations()
+
         binding.swipeContainer.isRefreshing = false
-        binding.lastRefreshTime.text = sfd?.format(Calendar.getInstance().time)
+        binding.lastRefreshTime.text = sfd.format(Calendar.getInstance().time)
     }
 }

@@ -14,7 +14,7 @@ class DoctorAdapter : RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder>() {
     ): DoctorViewHolder {
         return DoctorViewHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.fragment_chosen_doctor,
+                R.layout.chosen_doctor_item,
                 parent,
                 false
             )

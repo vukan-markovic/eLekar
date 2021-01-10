@@ -9,4 +9,8 @@ class LoginFirebaseViewModel : ViewModel() {
     fun addUser() {
         repo.addUser()
     }
+
+    fun deleteUser(userID: String) {
+        repo.deleteUser(userID)
+    }
 }
