@@ -1,26 +1,21 @@
 package vukan.com.euprava
 
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.viewModels
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.firebase.ui.auth.AuthUI
-import com.google.android.material.snackbar.Snackbar
 import vukan.com.euprava.databinding.ActivityMainBinding
-import vukan.com.euprava.ui.login.firebase.LoginFirebaseViewModel
 
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DrawerNavigation {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private val loginFirebaseViewModel by viewModels<LoginFirebaseViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,47 +23,38 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
         val navController = findNavController(R.id.nav_host_fragment)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_doctor, R.id.nav_help, R.id.nav_logout, R.id.nav_delete),
+            setOf(R.id.nav_home, R.id.nav_doctor, R.id.nav_help),
             binding.drawerLayout
         )
 
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "", Snackbar.LENGTH_LONG)
-                .setAction("", null).show()
-        }
-
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+    }
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.nav_logout) {
-                AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener {
-                        Toast.makeText(this, R.string.logout, Toast.LENGTH_SHORT)
-                            .show()
-                    }
-            } else if (destination.id == R.id.nav_delete) {
-                AlertDialog.Builder(this)
-                    .setTitle(R.string.lbo_help)
-                    .setMessage(R.string.delete_account)
-                    .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
-                        AuthUI.getInstance()
-                            .delete(this)
-                            .addOnCompleteListener {
-                                Toast.makeText(this, R.string.account_deleted, Toast.LENGTH_SHORT)
-                                    .show()
-                            }
+    override fun setDrawerEnabled(enabled: Boolean) {
+        val lockMode =
+            if (enabled) DrawerLayout.LOCK_MODE_UNLOCKED else DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 
-                        loginFirebaseViewModel.deleteUser("")
-                    }
-                    .setNegativeButton(android.R.string.cancel, null)
-                    .setIcon(android.R.drawable.ic_menu_info_details)
-                    .show()
-            }
-        }
+        binding.drawerLayout.setDrawerLockMode(lockMode)
+
+        binding.appBarMain.toolbar.navigationIcon =
+            if (enabled) ContextCompat.getDrawable(this, R.drawable.ic_menu) else null
+    }
+
+    override fun setIcon() {
+        binding.appBarMain.toolbar.navigationIcon =
+            ContextCompat.getDrawable(this, R.drawable.ic_arrow_back)
+    }
+
+    override fun setHeaderData(lboBzk: Array<String>) {
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.lbo).text =
+            lboBzk[0]
+
+        binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bzk).text =
+            lboBzk[1]
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.R
 import vukan.com.euprava.databinding.FragmentLoginBzkBinding
 import vukan.com.euprava.ui.login.afterTextChanged
@@ -42,6 +43,8 @@ class LoginBZKFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as DrawerNavigation).setDrawerEnabled(false)
+        (activity as DrawerNavigation).setIcon()
 
         loginBZKViewModel.formState.observe(viewLifecycleOwner, Observer {
             val state = it ?: return@Observer
@@ -58,8 +61,8 @@ class LoginBZKFragment : Fragment() {
             findNavController().navigate(
                 LoginBZKFragmentDirections.actionNavLoginBZKToNavLoginFirebase(
                     arrayOf(
-                        binding.inputBzk.text.toString(),
-                        LoginBZKFragmentArgs.fromBundle(requireArguments()).lbo
+                        LoginBZKFragmentArgs.fromBundle(requireArguments()).lbo,
+                        binding.inputBzk.text.toString()
                     )
                 )
             )
@@ -70,7 +73,7 @@ class LoginBZKFragment : Fragment() {
                 .setTitle(R.string.bzk_help_title)
                 .setMessage(R.string.bzk_help_text)
                 .setPositiveButton(android.R.string.ok, null)
-                .setIcon(android.R.drawable.ic_menu_info_details)
+                .setIcon(R.drawable.ic_info)
                 .show()
         }
     }

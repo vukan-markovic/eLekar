@@ -6,11 +6,7 @@ import vukan.com.euprava.data.Repository
 class LoginFirebaseViewModel : ViewModel() {
     private val repo: Repository = Repository()
 
-    fun addUser() {
-        repo.addUser()
-    }
-
-    fun deleteUser(userID: String) {
-        repo.deleteUser(userID)
+    fun addUser(lboBzk: Array<String>) {
+        repo.addUser(lboBzk)
     }
 }

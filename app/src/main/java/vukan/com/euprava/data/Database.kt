@@ -2,40 +2,43 @@ package vukan.com.euprava.data
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.Timestamp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
-import vukan.com.euprava.callbacks.ExaminationCallback
-import vukan.com.euprava.callbacks.UserCallback
+import com.google.firebase.firestore.SetOptions
+import vukan.com.euprava.data.model.Doctor
+import vukan.com.euprava.data.model.Examination
+import vukan.com.euprava.data.model.Institution
 import vukan.com.euprava.data.model.User
+import kotlin.reflect.KFunction1
 
 
 class Database {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val firebaseUser: FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
-    fun addUser(user: FirebaseUser?) {
-    }
+    fun addUser(userID: String, lboBzk: Array<String>) {
+        val doc = firestore.collection("users").document(userID)
 
-    fun deleteUser(userID: String) {
-        firestore.collection("products").whereEqualTo("userID", userID).get()
-            .addOnCompleteListener { task: Task<QuerySnapshot?> ->
-                if (task.isSuccessful) {
-                    for (document in task.result!!) document.reference
-                        .delete()
-                }
+        firestore.runTransaction { transaction ->
+            val snapshot: DocumentSnapshot = transaction.get(doc)
+
+            if (!snapshot.exists()) {
+                firestore.collection("users").document(userID).set(
+                    User(userID, "Petar", "Petrovic", lboBzk[0], lboBzk[1]),
+                    SetOptions.merge()
+                )
             }
+        }
     }
 
-    fun getUser(userID: String, callback: UserCallback) {
+    fun getUser(userID: String, callback: KFunction1<User, Unit>) {
         firestore.collection("users").whereEqualTo("userID", userID).get()
             .addOnCompleteListener { task: Task<QuerySnapshot?> ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
-                        callback.onCallback(
+                        callback(
                             User(
-                                userID = document.getString("userID").toString(),
+                                userID = userID,
                                 name = document.getString("name").toString(),
                                 surname = document.getString("surname").toString(),
                                 lbo = document.getString("lbo").toString(),
@@ -47,33 +50,114 @@ class Database {
             }
     }
 
-//    fun isFavourite(productID: String, userID: String, callback: ExaminationCallback) {
-//        firestore.collection("favouriteProducts").document(productID + userID).get()
-//            .addOnCompleteListener { task: Task<DocumentSnapshot?> ->
-//                if (task.isSuccessful) {
-//                    if (task.result?.exists() == true)
-//                        callback.onCallback() else callback.onCallback(false)
-//                }
-//            }
-//    }
+    fun addExamination(doctorID: String, userID: String, dateTime: Timestamp) {
+        val doc = firestore.collection("examinations").document()
 
-    fun addExamination(doctorID: String, dateTime: Timestamp) {
-//        firestore.collection("favouriteProducts").document(productID + userID).set(product);
+        doc.set(
+            Examination(
+                examinationID = doc.id,
+                dateTime = dateTime,
+                status = true,
+                doctorID = doctorID,
+                userID = userID
+            ), SetOptions.merge()
+        )
     }
 
-    fun getExaminations(callback: ExaminationCallback) {
+    fun getExaminations(userID: String, callback: KFunction1<List<Examination>, Unit>) {
+        val examinations = ArrayList<Examination>()
 
-    }
+        firestore.collection("examinations").whereEqualTo("userID", userID)
+            .whereEqualTo("status", true).get()
+            .addOnCompleteListener { task: Task<QuerySnapshot?> ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        examinations.add(
+                            Examination(
+                                examinationID = document.getString("examinationID").toString(),
+                                dateTime = document.getTimestamp("dateTime"),
+                                status = true,
+                                doctorID = document.getString("doctorID").toString(),
+                                userID = userID
+                            )
+                        )
+                    }
 
-    fun getDoctors(userID: String) {
-
-    }
-
-    fun getInstitution(institutionID: String) {
-
+                    callback(examinations)
+                }
+            }
     }
 
     fun cancelExamination(examinationID: String) {
+        val doc = firestore.collection("examinations").document(examinationID)
 
+        firestore.runTransaction { transaction ->
+            transaction.update(doc, "status", false)
+        }
+    }
+
+    fun getDoctor(doctorID: String, callback: KFunction1<Doctor, Unit>) {
+        firestore.collection("doctors").whereEqualTo("doctorID", doctorID).get()
+            .addOnCompleteListener { task: Task<QuerySnapshot?> ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        callback(
+                            Doctor(
+                                doctorID = doctorID,
+                                name = document.getString("name").toString(),
+                                surname = document.getString("surname").toString(),
+                                specialization = document.getString("specialization").toString(),
+                                institutionID = document.getString("institutionID").toString()
+                            )
+                        )
+                    }
+                }
+            }
+    }
+
+    fun getDoctors(lboBzk: Array<String>, callback: KFunction1<List<Doctor>, Unit>) {
+        val doctors = ArrayList<Doctor>()
+        val lbo = lboBzk[0]
+        val bzk = lboBzk[1]
+
+        firestore.collection("institutions")
+            .whereIn("doctorID", listOf(lbo[lbo.length - 1], bzk[bzk.length - 1])).get()
+            .addOnCompleteListener { task: Task<QuerySnapshot?> ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        doctors.add(
+                            Doctor(
+                                doctorID = document.getString("doctorID").toString(),
+                                name = document.getString("name").toString(),
+                                surname = document.getString("surname").toString(),
+                                specialization = document.getString("specialization").toString(),
+                                institutionID = document.getString("institutionID").toString()
+                            )
+                        )
+
+                    }
+
+                    callback(doctors)
+                }
+            }
+    }
+
+    fun getInstitution(institutionID: String, callback: KFunction1<Institution, Unit>) {
+        firestore.collection("institutions").whereEqualTo("institutionID", institutionID).get()
+            .addOnCompleteListener { task: Task<QuerySnapshot?> ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        callback(
+                            Institution(
+                                institutionID = document.getString("institutionID").toString(),
+                                name = document.getString("name").toString(),
+                                address = document.getString("address").toString(),
+                                place = document.getString("place").toString(),
+                                workingTime = document.getString("workingTime").toString()
+                            )
+                        )
+                    }
+                }
+            }
     }
 }

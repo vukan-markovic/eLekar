@@ -11,13 +11,17 @@ class LoginLBOViewModel : ViewModel() {
     private var lboError: Int? = 0
 
     fun checkLBO(lbo: String) {
-        if (lbo.isBlank()) {
-            lboError = R.string.invalid_lbo
-            setFormState()
-        } else {
-            lboError = null
-            setFormState()
-            isDataValid()
+        when {
+            lbo.isBlank() -> {
+                lboError = R.string.invalid_lbo
+                setFormState()
+            }
+            lbo.length != 11 -> lboError = 0
+            else -> {
+                lboError = null
+                setFormState()
+                isDataValid()
+            }
         }
     }
 

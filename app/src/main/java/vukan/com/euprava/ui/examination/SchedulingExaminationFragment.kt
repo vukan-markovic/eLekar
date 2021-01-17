@@ -15,6 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.Timestamp
+import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.databinding.FragmentSchedulingExaminationBinding
 import java.util.*
 
@@ -52,6 +53,7 @@ class SchedulingExaminationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as DrawerNavigation).setDrawerEnabled(true)
 
         schedulingExaminationViewModel.formState.observe(
             viewLifecycleOwner,
@@ -80,7 +82,7 @@ class SchedulingExaminationFragment : Fragment() {
                     dateTime = Timestamp(calendar.time)
                     schedulingExaminationViewModel.setTime()
                 }, hour, minute, true
-            ) //Yes
+            )
 
             timePicker.setTitle("Izaberite vreme")
             timePicker.show()
@@ -117,7 +119,6 @@ class SchedulingExaminationFragment : Fragment() {
             )
 
             datePickerDialog.datePicker.minDate = calendarMin.timeInMillis
-
             val calendarMax = Calendar.getInstance()
 
             calendarMax.set(

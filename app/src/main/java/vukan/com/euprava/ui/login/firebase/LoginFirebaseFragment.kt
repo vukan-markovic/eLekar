@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.R
 import vukan.com.euprava.databinding.FragmentLoginFirebaseBinding
-
 
 class LoginFirebaseFragment : Fragment() {
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -37,23 +38,26 @@ class LoginFirebaseFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as DrawerNavigation).setDrawerEnabled(false)
 
         authStateListener = AuthStateListener {
-            startActivityForResult(
-                AuthUI.getInstance()
-                    .createSignInIntentBuilder()
-                    .setAvailableProviders(
-                        listOf(
-                            AuthUI.IdpConfig.EmailBuilder().build(),
-                            AuthUI.IdpConfig.PhoneBuilder().build()
+            if (it.currentUser == null) {
+                startActivityForResult(
+                    AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setAvailableProviders(
+                            listOf(
+                                AuthUI.IdpConfig.EmailBuilder().build(),
+                                AuthUI.IdpConfig.PhoneBuilder().build()
+                            )
                         )
-                    )
-                    .setLogo(R.mipmap.ic_launcher)
-                    .setTosAndPrivacyPolicyUrls(
-                        "https://sites.google.com/view/elekar-terms-and-conditions",
-                        "https://sites.google.com/view/elekar-privacy-policy"
-                    ).build(), RC_SIGN_IN
-            )
+                        .setLogo(R.mipmap.ic_launcher)
+                        .setTosAndPrivacyPolicyUrls(
+                            "https://sites.google.com/view/elekar-terms-and-conditions",
+                            "https://sites.google.com/view/elekar-privacy-policy"
+                        ).build(), RC_SIGN_IN
+                )
+            }
         }
     }
 
@@ -61,10 +65,14 @@ class LoginFirebaseFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == RC_SIGN_IN) {
-            if (resultCode == RESULT_OK)
-                loginFirebaseViewModel.addUser()
-            if (IdpResponse.fromResultIntent(data) == null)
-                activity?.finish()
+            if (resultCode == RESULT_OK) {
+                val lboBzk = LoginFirebaseFragmentArgs.fromBundle(requireArguments()).lboBzk
+                (activity as DrawerNavigation).setHeaderData(lboBzk)
+                loginFirebaseViewModel.addUser(lboBzk)
+                findNavController().navigate(LoginFirebaseFragmentDirections.actionNavLoginFirebaseToNavHome())
+            }
+
+            if (IdpResponse.fromResultIntent(data) == null) activity?.onBackPressed()
         }
     }
 

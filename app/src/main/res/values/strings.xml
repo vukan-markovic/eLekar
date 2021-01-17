@@ -2,17 +2,14 @@
     <string name="app_name">eLekar</string>
     <string name="navigation_drawer_open">Otvorite navigacioni meni</string>
     <string name="navigation_drawer_close">Zatvorite navigacioni meni</string>
-    <string name="nav_header_title">eLekar</string>
     <string name="nav_header_subtitle">Zakazivanje pregleda</string>
     <string name="nav_header_desc">Navigaciono zaglavlje</string>
     <string name="menu_home">Lista pregleda</string>
     <string name="menu_doctor">Izabrani lekar</string>
     <string name="menu_help">Pomoć</string>
-    <string name="menu_logout">Odjava</string>
     <string name="fab">Zakažite pregled</string>
     <string name="lbo">Unesite vaš LBO</string>
     <string name="login">Prijavljivanje</string>
-    <string name="report">Izveštaj</string>
     <string name="bzk">Unesite vaš BZK</string>
     <string name="scheduling_examination">Zakažite pregled</string>
     <string name="help_text">
@@ -32,14 +29,12 @@
     <string name="bzk_hint">Unesite vaš BZK</string>
     <string name="confirm">Potvrdi</string>
     <string name="privacy_policy">Saglasan/a sam sa pravima i uslovima korišćenja</string>
-    <string name="verification_code">Unesite vaš verifikacioni kod</string>
-    <string name="menu_delete">Brisanje naloga</string>
     <string name="chose_time">Izaberite vreme</string>
     <string name="chose_date">Izaberite datum</string>
     <string name="chose_term">Izaberite termin</string>
-    <string name="doctor_image">Doctor image</string>
-    <string name="date_image">Date image</string>
-    <string name="time_image">Time image</string>
+    <string name="doctor_image">Slika doktora</string>
+    <string name="date_image">Slika datuma</string>
+    <string name="time_image">Slika vremena</string>
     <string name="title_help">eLEKAR ANDROID MOBILNA APLIKACIJA</string>
     <string name="no_examination">Trenutno nemate zakazanih pregleda!</string>
     <string name="lbo_help_title">LBO</string>
@@ -54,8 +49,12 @@
     </string>
     <string name="invalid_bzk">BZK nije validan!</string>
     <string name="invalid_lbo">LBO nije validan!</string>
-    <string name="account_deleted">Nalog je obrisan!</string>
     <string name="logout">Odjavljeni ste</string>
     <string name="invalid_date">Pregled možete zakazati samo radnim danima!</string>
-    <string name="delete_account">Da li ste sigurni da želite da izbrišete vaš nalog?</string>
+    <string name="logout_account">Da li ste sigurni da želite da se odjavite?</string>
+    <string name="logout_title">Odjava</string>
+    <string name="cancel_examination">Otkažite pregled</string>
+    <string name="examination_canceled">Pregled je otkazan!</string>
+    <string name="cancel_examination_text">Da li ste sigurni da želite da otkažete pregled?</string>
+    <string name="institution">Institucija</string>
 </resources>

@@ -4,13 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import vukan.com.euprava.DrawerNavigation
+import vukan.com.euprava.R
 import vukan.com.euprava.databinding.FragmentChosenDoctorBinding
+import vukan.com.euprava.ui.adapters.DoctorAdapter
+import java.text.SimpleDateFormat
+import java.util.*
 
-class ChosenDoctorFragment : Fragment() {
+class ChosenDoctorFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
+    DoctorAdapter.DoctorItemClickListener {
+
     private val chosenDoctorViewModel by viewModels<ChosenDoctorViewModel>()
     private lateinit var binding: FragmentChosenDoctorBinding
+    private lateinit var adapter: DoctorAdapter
+    private var sfd = SimpleDateFormat("dd-MM-yyyy, HH:mm", Locale.getDefault())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +35,58 @@ class ChosenDoctorFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as DrawerNavigation).setDrawerEnabled(true)
+        binding.recyclerViewDoctor.setHasFixedSize(true)
+        binding.recyclerViewDoctor.layoutManager = LinearLayoutManager(context)
+        adapter = DoctorAdapter(this)
+        binding.recyclerViewDoctor.adapter = adapter
+        binding.swipeContainer.setOnRefreshListener(this)
 
-        chosenDoctorViewModel.getDoctors("")
+        binding.swipeContainer.setColorSchemeResources(
+            R.color.purple_200,
+            R.color.purple_500,
+            R.color.purple_700,
+            R.color.teal_200
+        )
+
+        binding.swipeContainer.post {
+            binding.swipeContainer.isRefreshing = true
+            loadRecyclerViewData()
+        }
+    }
+
+    override fun onRefresh() {
+        loadRecyclerViewData()
+    }
+
+    private fun loadRecyclerViewData() {
+        binding.swipeContainer.isRefreshing = true
+
+        chosenDoctorViewModel.getUser().observe(viewLifecycleOwner) { user ->
+            chosenDoctorViewModel.getDoctors(arrayOf(user.lbo, user.bzk))
+                .observe(viewLifecycleOwner) { doctors ->
+                    adapter.setDoctors(doctors)
+                    binding.recyclerViewDoctor.adapter = adapter
+                    binding.swipeContainer.isRefreshing = false
+                    binding.lastRefreshTime.text = sfd.format(Calendar.getInstance().time)
+                }
+        }
+    }
+
+    override fun onListItemClick(institutionID: String) {
+        chosenDoctorViewModel.getInstitution(institutionID)
+            .observe(viewLifecycleOwner) { institution ->
+                AlertDialog.Builder(requireContext())
+                    .setTitle(getString(R.string.institution))
+                    .setMessage(
+                        "Naziv: " + institution.name + "\n" +
+                                "Mesto: " + institution.place + "\n" +
+                                "Adresa: " + institution.address + "\n" +
+                                "Radno vreme: " + institution.workingTime
+                    )
+                    .setPositiveButton(android.R.string.ok, null)
+                    .setIcon(R.drawable.ic_hospital)
+                    .show()
+            }
     }
 }

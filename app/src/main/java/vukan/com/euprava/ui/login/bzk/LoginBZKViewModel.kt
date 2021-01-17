@@ -11,13 +11,17 @@ class LoginBZKViewModel : ViewModel() {
     private var bzkError: Int? = 0
 
     fun checkBZK(bzk: String) {
-        if (bzk.isBlank()) {
-            bzkError = R.string.invalid_bzk
-            setFormState()
-        } else {
-            bzkError = null
-            setFormState()
-            isDataValid()
+        when {
+            bzk.isBlank() -> {
+                bzkError = R.string.invalid_bzk
+                setFormState()
+            }
+            bzk.length != 11 -> bzkError = 0
+            else -> {
+                bzkError = null
+                setFormState()
+                isDataValid()
+            }
         }
     }
 

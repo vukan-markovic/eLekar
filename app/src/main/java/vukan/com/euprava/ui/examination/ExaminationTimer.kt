@@ -50,12 +50,8 @@ class ExaminationTimer(
             mTimePicker = findViewById(timePickerField.getInt(null))
             val minuteField: Field = classForid.getField("minute")
             val hourField: Field = classForid.getField("hour")
-
-            val minuteSpinner = mTimePicker
-                .findViewById(minuteField.getInt(null)) as NumberPicker
-
-            val mHourSpinner = mTimePicker
-                .findViewById(hourField.getInt(null)) as NumberPicker
+            val minuteSpinner = mTimePicker.findViewById(minuteField.getInt(null)) as NumberPicker
+            val mHourSpinner = mTimePicker.findViewById(hourField.getInt(null)) as NumberPicker
 
             minuteSpinner.minValue = 0
             minuteSpinner.maxValue = 60 / TIME_PICKER_INTERVAL - 1
@@ -67,9 +63,7 @@ class ExaminationTimer(
                 i += TIME_PICKER_INTERVAL
             }
 
-            minuteSpinner.displayedValues = displayedValues
-                .toTypedArray()
-
+            minuteSpinner.displayedValues = displayedValues.toTypedArray()
             val day = SchedulingExaminationFragment.dateTime.toDate().day
 
             if ((day in 1..7) || (day in 15..21)) {

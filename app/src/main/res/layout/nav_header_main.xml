@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/nav_header_height"
+    android:layout_height="wrap_content"
     android:background="@drawable/side_nav_bar"
     android:gravity="bottom"
     android:orientation="vertical"
@@ -18,7 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
@@ -26,18 +25,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/nav_header_title"
+        android:paddingBottom="@dimen/nav_header_vertical_spacing"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/nav_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_header_subtitle" />
 
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/lbo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Vukan Marković" />
+        android:paddingBottom="@dimen/nav_header_vertical_spacing"
+        tools:text="LBO: 59385720192" />
+
+    <TextView
+        android:id="@+id/bzk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="BZK: 49900293841" />
 </LinearLayout>

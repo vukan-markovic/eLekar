@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.R
 import vukan.com.euprava.databinding.FragmentLoginLboBinding
 import vukan.com.euprava.ui.login.afterTextChanged
@@ -42,6 +43,7 @@ class LoginLBOFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as DrawerNavigation).setDrawerEnabled(false)
 
         loginLBOViewModel.formState.observe(viewLifecycleOwner, Observer {
             val state = it ?: return@Observer
@@ -66,7 +68,7 @@ class LoginLBOFragment : Fragment() {
                 .setTitle(R.string.lbo_help_title)
                 .setMessage(R.string.lbo_help_text)
                 .setPositiveButton(android.R.string.ok, null)
-                .setIcon(android.R.drawable.ic_menu_info_details)
+                .setIcon(R.drawable.ic_info)
                 .show()
         }
     }

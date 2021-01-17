@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Widget.TextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:minHeight">48dp</item>
-        <item name="android:textColor">@color/colorPrimaryDark</item>
-    </style>
-
     <style name="Widget.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="hintTextColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/purple_200</item>
         <item name="errorEnabled">true</item>
         <item name="endIconTint">@color/black</item>
         <item name="endIconMode">clear_text</item>
         <item name="counterEnabled">true</item>
-        <item name="counterTextColor">@color/colorAccent</item>
+        <item name="counterTextColor">@color/purple_500</item>
     </style>
 
     <style name="Widget.App.CardView" parent="Widget.MaterialComponents.CardView">
