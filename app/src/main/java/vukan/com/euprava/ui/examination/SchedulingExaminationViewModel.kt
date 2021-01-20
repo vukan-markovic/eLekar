@@ -6,19 +6,15 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.Timestamp
 import vukan.com.euprava.R
 import vukan.com.euprava.data.Repository
+import vukan.com.euprava.data.model.Examination
 
 class SchedulingExaminationViewModel : ViewModel() {
     private val repo: Repository = Repository()
     private val _form = MutableLiveData<ExaminationState>()
+    private var examinations: ArrayList<Examination>? = null
     val formState: LiveData<ExaminationState> = _form
     private var timeError: Int? = 0
     private var dateError: Int? = 0
-
-    fun setTime() {
-        timeError = null
-        setFormState()
-        isDataValid()
-    }
 
     fun checkDate(day: Int) {
         if (day == 0 || day == 6) {
@@ -29,6 +25,25 @@ class SchedulingExaminationViewModel : ViewModel() {
             setFormState()
             isDataValid()
         }
+    }
+
+    fun checkTime(time: String) {
+        if (!isTermFree(time)) {
+            timeError = R.string.invalid_term
+            setFormState()
+        } else {
+            timeError = null
+            setFormState()
+            isDataValid()
+        }
+    }
+
+    private fun isTermFree(time: String): Boolean {
+        examinations?.forEach {
+            if (it.dateTime.toString() == time) return false
+        }
+
+        return true
     }
 
     private fun setFormState() {
@@ -43,5 +58,9 @@ class SchedulingExaminationViewModel : ViewModel() {
 
     fun addExamination(doctorID: String, dateTime: Timestamp) {
         repo.addExamination(doctorID, dateTime)
+    }
+
+    fun getDoctorExaminations(doctorID: String) {
+        examinations = repo.getDoctorExaminations(doctorID)
     }
 }

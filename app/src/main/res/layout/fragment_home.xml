@@ -16,20 +16,21 @@
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/last_refresh_time">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view_home"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/last_refresh_time" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -49,10 +50,10 @@
         <TextView
             android:id="@+id/last_refresh_time"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:textAlignment="center"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/swipe_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

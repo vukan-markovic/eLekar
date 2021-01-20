@@ -54,7 +54,7 @@
                 android:id="@+id/input_bzk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints="@string/lbo"
+                android:autofillHints="@string/lbo_input"
                 android:inputType="number"
                 android:maxLength="11"
                 android:textAlignment="center"

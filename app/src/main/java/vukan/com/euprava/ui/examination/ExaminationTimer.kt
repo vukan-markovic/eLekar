@@ -66,7 +66,7 @@ class ExaminationTimer(
             minuteSpinner.displayedValues = displayedValues.toTypedArray()
             val day = SchedulingExaminationFragment.dateTime.toDate().day
 
-            if ((day in 1..7) || (day in 15..21)) {
+            if ((day in 0..7) || (day in 15..21)) {
                 mHourSpinner.minValue = 7
                 mHourSpinner.maxValue = 13
             } else if ((day in 8..14) || (day in 22..31)) {

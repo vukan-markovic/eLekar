@@ -35,9 +35,7 @@ class ExaminationAdapter(listener: ExaminationItemClickListener) :
     }
 
     override fun onBindViewHolder(holder: ExaminationViewHolder, position: Int) {
-        holder.viewBinding.doctorName.text =
-            repository.getDoctorName(examinations[position].doctorID)
-
+        holder.viewBinding.doctorName.text = ""
         holder.viewBinding.examinationDate.text = sfdDate.format(examinations[position].dateTime)
         holder.viewBinding.examinationTime.text = sfdTime.format(examinations[position].dateTime)
     }

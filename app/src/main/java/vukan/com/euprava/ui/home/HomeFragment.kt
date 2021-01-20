@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.firebase.ui.auth.AuthUI
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import vukan.com.euprava.DrawerNavigation
@@ -46,10 +45,15 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DrawerNavigation).setDrawerEnabled(true)
 
         if (firebaseUser == null)
             findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavLoginLbo())
+
+        homeViewModel.getUser().observe(viewLifecycleOwner) { user ->
+            (activity as DrawerNavigation).setHeaderData(arrayOf(user.lbo, user.bzk))
+        }
+
+        (activity as DrawerNavigation).setDrawerEnabled(true)
 
         binding.recyclerViewHome.setHasFixedSize(true)
         binding.recyclerViewHome.layoutManager = LinearLayoutManager(context)
@@ -65,13 +69,7 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
         )
 
         binding.swipeContainer.post {
-            binding.swipeContainer.isRefreshing = true
             loadRecyclerViewData()
-        }
-
-        binding.fab.setOnClickListener { v ->
-            Snackbar.make(v, "", Snackbar.LENGTH_LONG)
-                .setAction("", null).show()
         }
     }
 
@@ -115,12 +113,25 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
             adapter.setExaminations(examinations)
             binding.recyclerViewHome.adapter = adapter
             binding.swipeContainer.isRefreshing = false
-            binding.lastRefreshTime.text = sfd.format(Calendar.getInstance().time)
+
+            binding.lastRefreshTime.text =
+                getString(R.string.last_refresh, sfd.format(Calendar.getInstance().time))
+
+            if (examinations.isEmpty()) binding.noExamination.visibility = View.VISIBLE
+            else binding.noExamination.visibility = View.GONE
         }
     }
 
     override fun onListItemClick(examinationID: String) {
-        homeViewModel.cancelExamination(examinationID)
-        loadRecyclerViewData()
+        AlertDialog.Builder(requireContext())
+            .setTitle(R.string.cancel_examination_title)
+            .setMessage(R.string.cancel_examination_message)
+            .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
+                homeViewModel.cancelExamination(examinationID)
+                loadRecyclerViewData()
+            }
+            .setNegativeButton(android.R.string.cancel, null)
+            .setIcon(R.drawable.ic_cancel)
+            .show()
     }
 }

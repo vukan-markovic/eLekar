@@ -51,10 +51,10 @@ class MainActivity : AppCompatActivity(), DrawerNavigation {
 
     override fun setHeaderData(lboBzk: Array<String>) {
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.lbo).text =
-            lboBzk[0]
+            getString(R.string.lbo_bzk, lboBzk[0].substring(7, 11))
 
         binding.navView.getHeaderView(0).findViewById<TextView>(R.id.bzk).text =
-            lboBzk[1]
+            getString(R.string.lbo_bzk, lboBzk[1].substring(7, 11))
     }
 
     override fun onSupportNavigateUp(): Boolean {

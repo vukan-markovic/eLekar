@@ -67,7 +67,6 @@ class LoginFirebaseFragment : Fragment() {
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == RESULT_OK) {
                 val lboBzk = LoginFirebaseFragmentArgs.fromBundle(requireArguments()).lboBzk
-                (activity as DrawerNavigation).setHeaderData(lboBzk)
                 loginFirebaseViewModel.addUser(lboBzk)
                 findNavController().navigate(LoginFirebaseFragmentDirections.actionNavLoginFirebaseToNavHome())
             }

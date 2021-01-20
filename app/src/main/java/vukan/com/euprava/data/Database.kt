@@ -51,7 +51,7 @@ class Database {
     }
 
     fun addExamination(doctorID: String, userID: String, dateTime: Timestamp) {
-        val doc = firestore.collection("examinations").document()
+        val doc = firestore.collection("examination").document()
 
         doc.set(
             Examination(
@@ -67,7 +67,7 @@ class Database {
     fun getExaminations(userID: String, callback: KFunction1<List<Examination>, Unit>) {
         val examinations = ArrayList<Examination>()
 
-        firestore.collection("examinations").whereEqualTo("userID", userID)
+        firestore.collection("examination").whereEqualTo("userID", userID)
             .whereEqualTo("status", true).get()
             .addOnCompleteListener { task: Task<QuerySnapshot?> ->
                 if (task.isSuccessful) {
@@ -88,8 +88,32 @@ class Database {
             }
     }
 
+    fun getDoctorExaminations(doctorID: String, callback: KFunction1<ArrayList<Examination>, Unit>) {
+        val examinations = ArrayList<Examination>()
+
+        firestore.collection("examination").whereEqualTo("status", true)
+            .whereEqualTo("doctorID", doctorID).get()
+            .addOnCompleteListener { task: Task<QuerySnapshot?> ->
+                if (task.isSuccessful) {
+                    for (document in task.result!!) {
+                        examinations.add(
+                            Examination(
+                                examinationID = document.getString("examinationID").toString(),
+                                dateTime = document.getTimestamp("dateTime"),
+                                status = true,
+                                doctorID = doctorID,
+                                userID = document.getString("userID").toString()
+                            )
+                        )
+                    }
+
+                    callback(examinations)
+                }
+            }
+    }
+
     fun cancelExamination(examinationID: String) {
-        val doc = firestore.collection("examinations").document(examinationID)
+        val doc = firestore.collection("examination").document(examinationID)
 
         firestore.runTransaction { transaction ->
             transaction.update(doc, "status", false)
@@ -120,8 +144,8 @@ class Database {
         val lbo = lboBzk[0]
         val bzk = lboBzk[1]
 
-        firestore.collection("institutions")
-            .whereIn("doctorID", listOf(lbo[lbo.length - 1], bzk[bzk.length - 1])).get()
+        firestore.collection("doctors")
+            .whereIn("doctorID", listOf(lbo[lbo.length - 1].toString(), bzk[bzk.length - 1].toString())).get()
             .addOnCompleteListener { task: Task<QuerySnapshot?> ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
@@ -143,13 +167,13 @@ class Database {
     }
 
     fun getInstitution(institutionID: String, callback: KFunction1<Institution, Unit>) {
-        firestore.collection("institutions").whereEqualTo("institutionID", institutionID).get()
+        firestore.collection("institution").whereEqualTo("institutionID", institutionID).get()
             .addOnCompleteListener { task: Task<QuerySnapshot?> ->
                 if (task.isSuccessful) {
                     for (document in task.result!!) {
                         callback(
                             Institution(
-                                institutionID = document.getString("institutionID").toString(),
+                                institutionID = institutionID,
                                 name = document.getString("name").toString(),
                                 address = document.getString("address").toString(),
                                 place = document.getString("place").toString(),

@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import vukan.com.euprava.data.Repository
 import vukan.com.euprava.data.model.Doctor
 import vukan.com.euprava.databinding.ChosenDoctorItemBinding
 import vukan.com.euprava.ui.doctor.ChosenDoctorFragmentDirections
@@ -13,11 +12,12 @@ import vukan.com.euprava.ui.doctor.ChosenDoctorFragmentDirections
 class DoctorAdapter(listener: DoctorItemClickListener) :
     RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder>() {
     private var doctors: List<Doctor> = ArrayList()
-    private val repository = Repository()
+    private var institution: String = ""
     val onClickListener: DoctorItemClickListener = listener
 
-    fun setDoctors(doctors: List<Doctor>) {
+    fun setDoctors(doctors: List<Doctor>, institution: String) {
         this.doctors = doctors
+        this.institution = institution
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DoctorViewHolder {
@@ -35,11 +35,8 @@ class DoctorAdapter(listener: DoctorItemClickListener) :
             holder.viewBinding.doctorName.text = it
         }
 
-        holder.viewBinding.institutionName.text =
-            repository.getInstitutionName(doctors[position].institutionID)
-
-        holder.viewBinding.doctorSpecialization.text =
-            repository.getDoctorSpecialization(doctors[position].doctorID)
+        holder.viewBinding.institutionName.text = institution
+        holder.viewBinding.doctorSpecialization.text = doctors[position].specialization
 
         holder.viewBinding.choseTerm.setOnClickListener {
             val action = ChosenDoctorFragmentDirections.actionNavDoctorToNavSchedulingExamination()

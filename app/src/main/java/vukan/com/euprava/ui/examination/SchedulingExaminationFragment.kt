@@ -2,14 +2,11 @@ package vukan.com.euprava.ui.examination
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
-import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,6 +16,7 @@ import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.databinding.FragmentSchedulingExaminationBinding
 import java.util.*
 
+
 class SchedulingExaminationFragment : Fragment() {
     private val schedulingExaminationViewModel by viewModels<SchedulingExaminationViewModel>()
     private lateinit var binding: FragmentSchedulingExaminationBinding
@@ -27,10 +25,6 @@ class SchedulingExaminationFragment : Fragment() {
     companion object {
         private val calendar = Calendar.getInstance()
         lateinit var dateTime: Timestamp
-
-        fun checkDate(day: Int) {
-
-        }
     }
 
     override fun onCreateView(
@@ -54,6 +48,8 @@ class SchedulingExaminationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as DrawerNavigation).setDrawerEnabled(true)
+        val doctorID = SchedulingExaminationFragmentArgs.fromBundle(requireArguments()).doctorId
+        schedulingExaminationViewModel.getDoctorExaminations(doctorID)
 
         schedulingExaminationViewModel.formState.observe(
             viewLifecycleOwner,
@@ -65,11 +61,45 @@ class SchedulingExaminationFragment : Fragment() {
 
                 if (state.dateError != null && state.dateError != 0)
                     Toast.makeText(context, getString(state.dateError), Toast.LENGTH_SHORT).show()
+
+                if (state.timeError != null && state.timeError != 0)
+                    Toast.makeText(context, getString(state.timeError), Toast.LENGTH_SHORT).show()
             })
 
+        val date = OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, monthOfYear)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            schedulingExaminationViewModel.checkDate(calendar.get(Calendar.DAY_OF_WEEK))
+        }
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            date,
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+
+        val calendarMin = Calendar.getInstance()
+
+        calendarMin.set(
+            Calendar.DAY_OF_MONTH,
+            calendarMin.get(Calendar.DAY_OF_MONTH) + 1
+        )
+
+        datePickerDialog.datePicker.minDate = calendarMin.timeInMillis
+        val calendarMax = Calendar.getInstance()
+
+        calendarMax.set(
+            Calendar.DAY_OF_MONTH,
+            calendarMax.getActualMaximum(Calendar.DAY_OF_MONTH)
+        )
+
+        datePickerDialog.datePicker.maxDate = calendarMax.timeInMillis
+
         binding.datePicker.setOnClickListener {
-            val dialogFragment: DialogFragment = DatePickerFragment()
-            dialogFragment.show(parentFragmentManager, "date")
+            datePickerDialog.show()
         }
 
         binding.timePicker.setOnClickListener {
@@ -80,7 +110,7 @@ class SchedulingExaminationFragment : Fragment() {
                     calendar.set(Calendar.HOUR, selectedHour)
                     calendar.set(Calendar.MINUTE, selectedMinute)
                     dateTime = Timestamp(calendar.time)
-                    schedulingExaminationViewModel.setTime()
+                    schedulingExaminationViewModel.checkTime(dateTime.toString())
                 }, hour, minute, true
             )
 
@@ -89,52 +119,11 @@ class SchedulingExaminationFragment : Fragment() {
         }
 
         binding.confirm.setOnClickListener {
-            schedulingExaminationViewModel.addExamination(
-                SchedulingExaminationFragmentArgs.fromBundle(requireArguments()).doctorId,
-                dateTime
-            )
+            schedulingExaminationViewModel.addExamination(doctorID, dateTime)
 
             findNavController().navigate(
                 SchedulingExaminationFragmentDirections.actionNavSchedulingExaminationToNavHome()
             )
-        }
-    }
-
-    class DatePickerFragment : DialogFragment(),
-        OnDateSetListener {
-        override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-            val datePickerDialog = DatePickerDialog(
-                requireActivity(),
-                this,
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-            )
-
-            val calendarMin = Calendar.getInstance()
-
-            calendarMin.set(
-                Calendar.DAY_OF_MONTH,
-                calendarMin.get(Calendar.DAY_OF_MONTH) + 1
-            )
-
-            datePickerDialog.datePicker.minDate = calendarMin.timeInMillis
-            val calendarMax = Calendar.getInstance()
-
-            calendarMax.set(
-                Calendar.DAY_OF_MONTH,
-                calendarMax.getActualMaximum(Calendar.DAY_OF_MONTH)
-            )
-
-            datePickerDialog.datePicker.maxDate = calendarMax.timeInMillis
-            return datePickerDialog
-        }
-
-        override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, day)
-            checkDate(calendar.get(Calendar.DAY_OF_WEEK))
         }
     }
 }

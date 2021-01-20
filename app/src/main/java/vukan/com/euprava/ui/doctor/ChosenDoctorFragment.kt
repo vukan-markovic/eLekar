@@ -50,7 +50,6 @@ class ChosenDoctorFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
         )
 
         binding.swipeContainer.post {
-            binding.swipeContainer.isRefreshing = true
             loadRecyclerViewData()
         }
     }
@@ -65,28 +64,41 @@ class ChosenDoctorFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
         chosenDoctorViewModel.getUser().observe(viewLifecycleOwner) { user ->
             chosenDoctorViewModel.getDoctors(arrayOf(user.lbo, user.bzk))
                 .observe(viewLifecycleOwner) { doctors ->
-                    adapter.setDoctors(doctors)
-                    binding.recyclerViewDoctor.adapter = adapter
+                    doctors.forEach {
+                        chosenDoctorViewModel.getInstitution(it.institutionID)
+                            .observe(viewLifecycleOwner) { institution ->
+                                adapter.setDoctors(doctors, institution.name)
+                                binding.recyclerViewDoctor.adapter = adapter
+                            }
+                    }
+
                     binding.swipeContainer.isRefreshing = false
-                    binding.lastRefreshTime.text = sfd.format(Calendar.getInstance().time)
+                    binding.lastRefreshTime.text =
+                        getString(R.string.last_refresh, sfd.format(Calendar.getInstance().time))
                 }
         }
     }
 
     override fun onListItemClick(institutionID: String) {
+        var flag = true
+
         chosenDoctorViewModel.getInstitution(institutionID)
             .observe(viewLifecycleOwner) { institution ->
-                AlertDialog.Builder(requireContext())
-                    .setTitle(getString(R.string.institution))
-                    .setMessage(
-                        "Naziv: " + institution.name + "\n" +
-                                "Mesto: " + institution.place + "\n" +
-                                "Adresa: " + institution.address + "\n" +
-                                "Radno vreme: " + institution.workingTime
-                    )
-                    .setPositiveButton(android.R.string.ok, null)
-                    .setIcon(R.drawable.ic_hospital)
-                    .show()
+                if (flag) {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle(getString(R.string.institution))
+                        .setMessage(
+                            "Naziv: " + institution.name + "\n" +
+                                    "Mesto: " + institution.place + "\n" +
+                                    "Adresa: " + institution.address + "\n" +
+                                    "Radno vreme: " + institution.workingTime
+                        )
+                        .setPositiveButton(android.R.string.ok, null)
+                        .setIcon(R.drawable.ic_hospital)
+                        .show()
+                }
+
+                flag = false
             }
     }
 }
