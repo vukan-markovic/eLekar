@@ -1,7 +1,11 @@
 package vukan.com.euprava
 
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
@@ -13,7 +17,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import vukan.com.euprava.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), DrawerNavigation {
+class MainActivity : AppCompatActivity(), DrawerNavigation, ToastListener {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
@@ -23,7 +27,6 @@ class MainActivity : AppCompatActivity(), DrawerNavigation {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
         val navController = findNavController(R.id.nav_host_fragment)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.nav_home, R.id.nav_doctor, R.id.nav_help),
@@ -60,5 +63,21 @@ class MainActivity : AppCompatActivity(), DrawerNavigation {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun show(message: String) {
+        val layout: View = layoutInflater.inflate(
+            R.layout.custom_toast,
+            findViewById<View>(R.id.custom_toast_container) as ViewGroup?
+        )
+
+        layout.findViewById<TextView>(R.id.text).text = message
+
+        with(Toast(applicationContext)) {
+            setGravity(Gravity.CENTER_VERTICAL, 0, 0)
+            duration = Toast.LENGTH_LONG
+            view = layout
+            show()
+        }
     }
 }

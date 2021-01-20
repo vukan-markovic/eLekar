@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.R
+import vukan.com.euprava.ToastListener
 import vukan.com.euprava.databinding.FragmentLoginFirebaseBinding
 
 class LoginFirebaseFragment : Fragment() {
@@ -68,6 +69,7 @@ class LoginFirebaseFragment : Fragment() {
             if (resultCode == RESULT_OK) {
                 val lboBzk = LoginFirebaseFragmentArgs.fromBundle(requireArguments()).lboBzk
                 loginFirebaseViewModel.addUser(lboBzk)
+                (activity as ToastListener).show(getString(R.string.login_message))
                 findNavController().navigate(LoginFirebaseFragmentDirections.actionNavLoginFirebaseToNavHome())
             }
 

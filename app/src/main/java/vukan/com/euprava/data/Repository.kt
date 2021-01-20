@@ -22,8 +22,8 @@ class Repository {
         database.addUser(userID, lboBzk)
     }
 
-    fun addExamination(doctorID: String, dateTime: Timestamp) {
-        database.addExamination(doctorID, userID, dateTime)
+    fun addExamination(doctorID: String, doctorName: String, dateTime: Timestamp) {
+        database.addExamination(doctorID, doctorName, userID, dateTime)
 
     }
 
@@ -42,19 +42,14 @@ class Repository {
         return doctorExaminations.value
     }
 
-    fun getDoctorName(doctorID: String): String? {
+    fun getDoctor(doctorID: String): MutableLiveData<Doctor> {
         database.getDoctor(doctorID, doctor::setValue)
-        return doctor.value?.name
+        return doctor
     }
 
     fun getInstitution(institutionID: String): MutableLiveData<Institution> {
         database.getInstitution(institutionID, institution::setValue)
         return institution
-    }
-
-    fun getInstitutionName(institutionID: String): String? {
-        database.getInstitution(institutionID, institution::setValue)
-        return institution.value?.name
     }
 
     fun getUser(): MutableLiveData<User> {

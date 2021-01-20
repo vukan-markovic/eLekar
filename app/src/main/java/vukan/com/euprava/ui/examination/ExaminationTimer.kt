@@ -7,6 +7,8 @@ import android.content.DialogInterface
 import android.widget.NumberPicker
 import android.widget.TimePicker
 import java.lang.reflect.Field
+import java.util.*
+import kotlin.collections.ArrayList
 
 @Suppress("DEPRECATION")
 class ExaminationTimer(
@@ -64,9 +66,11 @@ class ExaminationTimer(
             }
 
             minuteSpinner.displayedValues = displayedValues.toTypedArray()
-            val day = SchedulingExaminationFragment.dateTime.toDate().day
+            val cal = Calendar.getInstance()
+            cal.time = SchedulingExaminationFragment.dateTime.toDate()
+            val day = cal.get(Calendar.DAY_OF_MONTH)
 
-            if ((day in 0..7) || (day in 15..21)) {
+            if ((day in 1..7) || (day in 15..21)) {
                 mHourSpinner.minValue = 7
                 mHourSpinner.maxValue = 13
             } else if ((day in 8..14) || (day in 22..31)) {

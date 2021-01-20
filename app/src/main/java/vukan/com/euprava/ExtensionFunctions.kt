@@ -1,4 +1,4 @@
-package vukan.com.euprava.ui.login
+package vukan.com.euprava
 
 import android.text.Editable
 import android.text.TextWatcher

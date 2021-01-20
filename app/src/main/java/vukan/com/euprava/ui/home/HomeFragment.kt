@@ -3,7 +3,6 @@ package vukan.com.euprava.ui.home
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.R
+import vukan.com.euprava.ToastListener
 import vukan.com.euprava.databinding.FragmentHomeBinding
 import vukan.com.euprava.ui.adapters.ExaminationAdapter
 import java.text.SimpleDateFormat
@@ -92,8 +92,7 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
                         .signOut(requireContext())
                         .addOnCompleteListener {
                             findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavLoginLbo())
-                            Toast.makeText(context, R.string.logout, Toast.LENGTH_SHORT)
-                                .show()
+                            (activity as ToastListener).show(getString(R.string.logout))
                         }
                 }
                 .setNegativeButton(android.R.string.cancel, null)
@@ -127,6 +126,7 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
             .setTitle(R.string.cancel_examination_title)
             .setMessage(R.string.cancel_examination_message)
             .setPositiveButton(android.R.string.ok) { _: DialogInterface?, _: Int ->
+                (activity as ToastListener).show(getString(R.string.examination_canceled))
                 homeViewModel.cancelExamination(examinationID)
                 loadRecyclerViewData()
             }

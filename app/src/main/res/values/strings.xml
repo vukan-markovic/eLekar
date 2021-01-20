@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eLekar</string>
     <string name="navigation_drawer_open">Otvorite navigacioni meni</string>
@@ -13,14 +14,17 @@
     <string name="bzk_input">Unesite vaš BZK</string>
     <string name="lbo_bzk">********%1$s</string>
     <string name="last_refresh">Poslednje ažuriranje: %1$s</string>
+    <string name="doctor_name_surname">%1$s %2$s</string>
+    <string name="examination_date">Datum pregleda: %1$s</string>
+    <string name="examination_time">Vreme pregleda: %1$s</string>
     <string name="scheduling_examination">Zakažite pregled</string>
     <string name="help_text">
-        Mobilna aplikacija služi za zakazivanje pregleda kod izabranog lekara. Da bi ste koristili usluge mobilne aplikacije
-        najpre se morate identifikovati unosom LBO-a i Broj Kartice Zdravstvenog osiguranja (BZK).
-        Nakon uspešne prijave na mobilnoj aplikaciji, možete pristupiti listi svojih izabranih lekara. Izborom
-        odgovarajućeg lekara i klikom na Zakaži pregled pristupate kalendaru aktivnosti Vašeg izabranog lekara.
-        Odaberite odgovarajući datum i klikom na slobodni termin isti rezervišite. Nakon toga možete pristupiti listi budućih
-        zakazanih pregleda kod izabranog lekara.
+        Mobilna aplikacija služi za zakazivanje pregleda kod izabranog lekara.\n\n
+        Da bi ste koristili usluge mobilne aplikacije najpre se morate identifikovati unosom LBO-a i Broj Kartice Zdravstvenog osiguranja (BZK).\n\n
+        Nakon uspešne prijave na mobilnoj aplikaciji, možete pristupiti listi svojih izabranih lekara.\n\n
+        Izborom odgovarajućeg lekara i klikom na Zakaži pregled pristupate kalendaru aktivnosti Vašeg izabranog lekara.\n\n
+        Odaberite odgovarajući datum i klikom na slobodni termin isti rezervišite.\n\n
+        Nakon toga možete pristupiti listi budućih zakazanih pregleda kod izabranog lekara.
     </string>
     <string name="lbo_help">Šta predstavlja LBO i gde ga mogu pronaći?</string>
     <string name="next">Dalje</string>
@@ -62,4 +66,6 @@
     <string name="invalid_term">Izabrani termin je zauzet!</string>
     <string name="cancel_examination_title">Otkazivanje pregleda</string>
     <string name="cancel_examination_message">Da li ste sigurni da želite da otkažete pregled?</string>
+    <string name="login_message">Uspešno prijavljivanje!</string>
+    <string name="examination_added">Pregled je uspešno zakazan!</string>
 </resources>

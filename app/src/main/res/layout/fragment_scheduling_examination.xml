@@ -29,10 +29,23 @@
         app:layout_constraintTop_toTopOf="parent"
         app:rippleColor="@color/teal_200" />
 
+    <TextView
+        android:id="@+id/examination_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/time_picker"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/date_picker"
+        tools:text="Datum pregleda: 01.01.2021." />
+
     <Button
         android:id="@+id/time_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="false"
+        android:enabled="false"
         android:text="@string/chose_time"
         app:layout_constraintBottom_toTopOf="@+id/confirm"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +53,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/date_picker"
         app:rippleColor="@color/teal_200" />
+
+    <TextView
+        android:id="@+id/examination_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time_picker"
+        tools:text="Vreme pregleda: 12:30" />
 
     <Button
         android:id="@+id/confirm"

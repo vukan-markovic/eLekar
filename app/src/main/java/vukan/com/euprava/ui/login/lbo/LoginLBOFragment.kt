@@ -11,8 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.R
+import vukan.com.euprava.afterTextChanged
 import vukan.com.euprava.databinding.FragmentLoginLboBinding
-import vukan.com.euprava.ui.login.afterTextChanged
 
 class LoginLBOFragment : Fragment() {
     private val loginLBOViewModel by viewModels<LoginLBOViewModel>()
