@@ -86,7 +86,7 @@ class Database {
 
     fun getDoctorExaminations(
         doctorID: String,
-        callback: KFunction1<ArrayList<Examination>, Unit>
+        callback: KFunction1<List<Examination>, Unit>
     ) {
         val examinations = ArrayList<Examination>()
 
@@ -173,8 +173,7 @@ class Database {
                                 institutionID = institutionID,
                                 name = document.getString("name").toString(),
                                 address = document.getString("address").toString(),
-                                place = document.getString("place").toString(),
-                                workingTime = document.getString("workingTime").toString()
+                                place = document.getString("place").toString()
                             )
                         )
                     }

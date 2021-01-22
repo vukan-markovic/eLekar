@@ -11,7 +11,7 @@
 
         <item
             android:id="@+id/nav_doctor"
-            android:icon="@drawable/ic_e_doctor_2"
+            android:icon="@drawable/ic_e_doctor"
             android:title="@string/menu_doctor" />
 
         <item

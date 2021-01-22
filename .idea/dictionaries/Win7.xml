@@ -67,6 +67,7 @@
       <w>navigacioni</w>
       <w>navigaciono</w>
       <w>naziv</w>
+      <w>nedelja</w>
       <w>nekoliko</w>
       <w>nemate</w>
       <w>nepromenljiv</w>
@@ -88,10 +89,12 @@
       <w>otkažete</w>
       <w>otkažite</w>
       <w>otvorite</w>
+      <w>petak</w>
       <w>petar</w>
       <w>petrovic</w>
       <w>poleđini</w>
       <w>pomoć</w>
+      <w>ponedeljak</w>
       <w>poruka</w>
       <w>poslednje</w>
       <w>potvrdi</w>
@@ -116,8 +119,10 @@
       <w>slika</w>
       <w>slobodni</w>
       <w>služi</w>
+      <w>sreda</w>
       <w>strane</w>
       <w>strani</w>
+      <w>subota</w>
       <w>svakom</w>
       <w>svoj</w>
       <w>svojih</w>
@@ -152,6 +157,7 @@
       <w>zdravlja</w>
       <w>zdravstvenog</w>
       <w>zdravstvenoj</w>
+      <w>četvrtak</w>
       <w>želite</w>
     </words>
   </dictionary>

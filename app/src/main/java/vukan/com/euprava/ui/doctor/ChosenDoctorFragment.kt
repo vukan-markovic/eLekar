@@ -38,7 +38,7 @@ class ChosenDoctorFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
         (activity as DrawerNavigation).setDrawerEnabled(true)
         binding.recyclerViewDoctor.setHasFixedSize(true)
         binding.recyclerViewDoctor.layoutManager = LinearLayoutManager(context)
-        adapter = DoctorAdapter(this)
+        adapter = DoctorAdapter(this, requireContext())
         binding.recyclerViewDoctor.adapter = adapter
         binding.swipeContainer.setOnRefreshListener(this)
 
@@ -84,14 +84,13 @@ class ChosenDoctorFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
         chosenDoctorViewModel.getInstitution(institutionID)
             .observe(viewLifecycleOwner) { institution ->
-                if (flag) {
+                if (flag && institution.institutionID == institutionID) {
                     AlertDialog.Builder(requireContext())
                         .setTitle(getString(R.string.institution))
                         .setMessage(
                             "Naziv: " + institution.name + "\n" +
                                     "Mesto: " + institution.place + "\n" +
-                                    "Adresa: " + institution.address + "\n" +
-                                    "Radno vreme: " + institution.workingTime
+                                    "Adresa: " + institution.address
                         )
                         .setPositiveButton(android.R.string.ok, null)
                         .setIcon(R.drawable.ic_hospital)

@@ -12,7 +12,7 @@ class Repository {
     private val database: Database = Database()
     private val userID: String = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private val examinations: MutableLiveData<List<Examination>> = MutableLiveData()
-    private val doctorExaminations: MutableLiveData<ArrayList<Examination>> = MutableLiveData()
+    private val doctorExaminations: MutableLiveData<List<Examination>> = MutableLiveData()
     private val doctor: MutableLiveData<Doctor> = MutableLiveData()
     private val databaseUser: MutableLiveData<User> = MutableLiveData()
     private val doctors: MutableLiveData<List<Doctor>> = MutableLiveData()
@@ -24,7 +24,6 @@ class Repository {
 
     fun addExamination(doctorID: String, doctorName: String, dateTime: Timestamp) {
         database.addExamination(doctorID, doctorName, userID, dateTime)
-
     }
 
     fun getExaminations(): MutableLiveData<List<Examination>> {
@@ -37,9 +36,9 @@ class Repository {
         return doctors
     }
 
-    fun getDoctorExaminations(doctorID: String): ArrayList<Examination>? {
+    fun getDoctorExaminations(doctorID: String): MutableLiveData<List<Examination>> {
         database.getDoctorExaminations(doctorID, doctorExaminations::setValue)
-        return doctorExaminations.value
+        return doctorExaminations
     }
 
     fun getDoctor(doctorID: String): MutableLiveData<Doctor> {

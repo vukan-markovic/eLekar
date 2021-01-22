@@ -57,7 +57,7 @@ class HomeFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener,
 
         binding.recyclerViewHome.setHasFixedSize(true)
         binding.recyclerViewHome.layoutManager = LinearLayoutManager(context)
-        adapter = ExaminationAdapter(this)
+        adapter = ExaminationAdapter(this, requireContext())
         binding.recyclerViewHome.adapter = adapter
         binding.swipeContainer.setOnRefreshListener(this)
 

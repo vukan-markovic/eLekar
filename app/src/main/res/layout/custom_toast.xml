@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/custom_toast_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_margin="4dp"
     android:background="@color/purple_500"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="4dp"
+    tools:ignore="Overdraw">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/app_icon"
-        android:src="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/text"
@@ -23,5 +26,4 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         tools:text="Poruka" />
-
 </LinearLayout>

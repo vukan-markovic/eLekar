@@ -14,11 +14,11 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:paddingTop="@dimen/activity_horizontal_margin"
         android:id="@+id/nav_header_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
+        android:paddingTop="@dimen/activity_horizontal_margin"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView

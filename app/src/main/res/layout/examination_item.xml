@@ -17,8 +17,8 @@
 
         <ImageView
             android:id="@+id/doctor_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:contentDescription="@string/doctor_image"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="44dp"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/doctor_image"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,8 +39,8 @@
 
         <ImageView
             android:id="@+id/date_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:contentDescription="@string/date_image"
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="50dp"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/date_image"
             app:layout_constraintTop_toBottomOf="@+id/doctor_name"
@@ -61,8 +61,8 @@
 
         <ImageView
             android:id="@+id/time_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:contentDescription="@string/time_image"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="56dp"
             android:textColor="@color/black"
             app:layout_constraintStart_toEndOf="@+id/time_image"
             app:layout_constraintTop_toBottomOf="@+id/examination_date"

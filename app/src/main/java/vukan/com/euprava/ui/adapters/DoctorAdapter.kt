@@ -1,15 +1,17 @@
 package vukan.com.euprava.ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import vukan.com.euprava.R
 import vukan.com.euprava.data.model.Doctor
 import vukan.com.euprava.databinding.ChosenDoctorItemBinding
 import vukan.com.euprava.ui.doctor.ChosenDoctorFragmentDirections
 
-class DoctorAdapter(listener: DoctorItemClickListener) :
+class DoctorAdapter(listener: DoctorItemClickListener, private val context: Context) :
     RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder>() {
     private var doctors: List<Doctor> = ArrayList()
     private var institution: String = ""
@@ -35,7 +37,9 @@ class DoctorAdapter(listener: DoctorItemClickListener) :
             holder.viewBinding.doctorName.text = it
         }
 
-        holder.viewBinding.institutionName.text = institution
+        holder.viewBinding.institutionName.text =
+            context.getString(R.string.institution_name, institution)
+
         holder.viewBinding.doctorSpecialization.text = doctors[position].specialization
 
         holder.viewBinding.choseTerm.setOnClickListener {

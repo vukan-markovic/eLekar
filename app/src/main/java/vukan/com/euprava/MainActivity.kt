@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -76,6 +75,7 @@ class MainActivity : AppCompatActivity(), DrawerNavigation, ToastListener {
         with(Toast(applicationContext)) {
             setGravity(Gravity.CENTER_VERTICAL, 0, 0)
             duration = Toast.LENGTH_LONG
+            @Suppress("DEPRECATION")
             view = layout
             show()
         }

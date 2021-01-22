@@ -4,6 +4,5 @@ data class Institution(
     val institutionID: String,
     val name: String,
     val place: String,
-    val address: String,
-    val workingTime: String
+    val address: String
 )

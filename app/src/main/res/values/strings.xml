@@ -68,4 +68,13 @@
     <string name="cancel_examination_message">Da li ste sigurni da želite da otkažete pregled?</string>
     <string name="login_message">Uspešno prijavljivanje!</string>
     <string name="examination_added">Pregled je uspešno zakazan!</string>
+    <string name="institution_name">Institucija: %1$s</string>
+    <string name="examination_date_day">%1$s, %2$s</string>
+    <string name="sunday">Nedelja</string>
+    <string name="monday">Ponedeljak</string>
+    <string name="tuesday">Utorak</string>
+    <string name="wednesday">Sreda</string>
+    <string name="thursday">Četvrtak</string>
+    <string name="friday">Petak</string>
+    <string name="saturday">Subota</string>
 </resources>

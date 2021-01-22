@@ -14,18 +14,21 @@ import com.google.firebase.Timestamp
 import vukan.com.euprava.DrawerNavigation
 import vukan.com.euprava.R
 import vukan.com.euprava.ToastListener
+import vukan.com.euprava.data.model.Examination
 import vukan.com.euprava.databinding.FragmentSchedulingExaminationBinding
 import java.text.SimpleDateFormat
 import java.util.*
-
+import kotlin.collections.ArrayList
 
 class SchedulingExaminationFragment : Fragment() {
     private val schedulingExaminationViewModel by viewModels<SchedulingExaminationViewModel>()
     private lateinit var binding: FragmentSchedulingExaminationBinding
     private var isDataValid: Boolean = false
+    private var sfdDateTime = SimpleDateFormat("dd-MM-yyyy, HH:mm", Locale.getDefault())
     private var sfdDate = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
     private var sfdTime = SimpleDateFormat("HH:mm", Locale.getDefault())
     private var doctorName: String = ""
+    private var doctorExaminations: List<Examination> = ArrayList()
 
     companion object {
         private val calendar = Calendar.getInstance()
@@ -54,7 +57,11 @@ class SchedulingExaminationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as DrawerNavigation).setDrawerEnabled(true)
         val doctorID = SchedulingExaminationFragmentArgs.fromBundle(requireArguments()).doctorId
+
         schedulingExaminationViewModel.getDoctorExaminations(doctorID)
+            .observe(viewLifecycleOwner) { examinations ->
+                doctorExaminations = examinations
+            }
 
         schedulingExaminationViewModel.getDoctor(doctorID).observe(viewLifecycleOwner) { doctor ->
             doctorName = getString(R.string.doctor_name_surname, doctor.name, doctor.surname)
@@ -74,14 +81,19 @@ class SchedulingExaminationFragment : Fragment() {
                     binding.timePicker.isEnabled = false
                     binding.timePicker.isClickable = false
                 } else {
-                    binding.examinationDate.text = sfdDate.format(dateTime.toDate())
+                    binding.examinationDate.text =
+                        getString(R.string.examination_date, sfdDate.format(dateTime.toDate()))
+
                     binding.timePicker.isEnabled = true
                     binding.timePicker.isClickable = true
                 }
 
                 if (state.timeError != null && state.timeError != 0)
                     (activity as ToastListener).show(getString(state.timeError))
-                else binding.examinationTime.text = sfdTime.format(dateTime.toDate())
+
+                if (isDataValid)
+                    binding.examinationTime.text =
+                        getString(R.string.examination_time, sfdTime.format(dateTime.toDate()))
             })
 
         val date = OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -126,10 +138,13 @@ class SchedulingExaminationFragment : Fragment() {
             val minute: Int = calendar.get(Calendar.MINUTE)
             val timePicker = ExaminationTimer(
                 context, { _, selectedHour, selectedMinute ->
-                    calendar.set(Calendar.HOUR, selectedHour)
+                    calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
                     calendar.set(Calendar.MINUTE, selectedMinute)
                     dateTime = Timestamp(calendar.time)
-                    schedulingExaminationViewModel.checkTime(dateTime.toString())
+                    schedulingExaminationViewModel.checkTime(
+                        sfdDateTime.format(dateTime.toDate()),
+                        doctorExaminations
+                    )
                 }, hour, minute, true
             )
 

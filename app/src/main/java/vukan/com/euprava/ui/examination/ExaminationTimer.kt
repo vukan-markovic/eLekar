@@ -25,7 +25,7 @@ class ExaminationTimer(
     private lateinit var mTimePicker: TimePicker
 
     companion object {
-        private const val TIME_PICKER_INTERVAL = 15
+        private const val TIME_PICKER_INTERVAL = 30
     }
 
     override fun updateTime(hourOfDay: Int, minuteOfHour: Int) {

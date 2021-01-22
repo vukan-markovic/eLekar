@@ -8,14 +8,16 @@ import vukan.com.euprava.R
 import vukan.com.euprava.data.Repository
 import vukan.com.euprava.data.model.Doctor
 import vukan.com.euprava.data.model.Examination
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SchedulingExaminationViewModel : ViewModel() {
     private val repo: Repository = Repository()
     private val _form = MutableLiveData<ExaminationState>()
-    private var examinations: ArrayList<Examination>? = null
     val formState: LiveData<ExaminationState> = _form
     private var timeError: Int? = 0
     private var dateError: Int? = 0
+    private var sfdDateTime = SimpleDateFormat("dd-MM-yyyy, HH:mm", Locale.getDefault())
 
     fun checkDate(day: Int) {
         if (day == 1 || day == 7) {
@@ -28,8 +30,8 @@ class SchedulingExaminationViewModel : ViewModel() {
         }
     }
 
-    fun checkTime(time: String) {
-        if (!isTermFree(time)) {
+    fun checkTime(time: String, examinations: List<Examination>) {
+        if (!isTermFree(time, examinations)) {
             timeError = R.string.invalid_term
             setFormState()
         } else {
@@ -39,9 +41,10 @@ class SchedulingExaminationViewModel : ViewModel() {
         }
     }
 
-    private fun isTermFree(time: String): Boolean {
-        examinations?.forEach {
-            if (it.dateTime.toString() == time) return false
+    private fun isTermFree(time: String, examinations: List<Examination>): Boolean {
+        examinations.forEach {
+            val date = it.dateTime?.toDate()
+            if (date != null && sfdDateTime.format(date) == time) return false
         }
 
         return true
@@ -65,7 +68,7 @@ class SchedulingExaminationViewModel : ViewModel() {
         return repo.getDoctor(doctorID)
     }
 
-    fun getDoctorExaminations(doctorID: String) {
-        examinations = repo.getDoctorExaminations(doctorID)
+    fun getDoctorExaminations(doctorID: String): MutableLiveData<List<Examination>> {
+        return repo.getDoctorExaminations(doctorID)
     }
 }
