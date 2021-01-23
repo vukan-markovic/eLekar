@@ -1,12 +1,12 @@
 package vukan.com.euprava.ui.examination
 
-import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.res.Resources
+import android.os.Build
 import android.widget.NumberPicker
 import android.widget.TimePicker
-import java.lang.reflect.Field
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -29,31 +29,61 @@ class ExaminationTimer(
     }
 
     override fun updateTime(hourOfDay: Int, minuteOfHour: Int) {
-        mTimePicker.currentHour = hourOfDay
-        mTimePicker.currentMinute = minuteOfHour / TIME_PICKER_INTERVAL
-    }
-
-    override fun onClick(dialog: DialogInterface, which: Int) {
-        when (which) {
-            BUTTON_POSITIVE -> mTimeSetListener?.onTimeSet(
-                mTimePicker, mTimePicker.currentHour,
-                mTimePicker.currentMinute * TIME_PICKER_INTERVAL
-            )
-            BUTTON_NEGATIVE -> cancel()
+        if (Build.VERSION.SDK_INT >= 23) {
+            mTimePicker.hour = hourOfDay
+            mTimePicker.minute = minuteOfHour / TIME_PICKER_INTERVAL
+        } else {
+            mTimePicker.currentHour = hourOfDay
+            mTimePicker.currentMinute = minuteOfHour / TIME_PICKER_INTERVAL
         }
     }
 
-    @SuppressLint("PrivateApi")
+    override fun onClick(dialog: DialogInterface, which: Int) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            when (which) {
+                BUTTON_POSITIVE -> mTimeSetListener?.onTimeSet(
+                    mTimePicker, mTimePicker.hour,
+                    mTimePicker.minute * TIME_PICKER_INTERVAL
+                )
+                BUTTON_NEGATIVE -> cancel()
+            }
+        } else {
+            when (which) {
+                BUTTON_POSITIVE -> mTimeSetListener?.onTimeSet(
+                    mTimePicker, mTimePicker.currentHour,
+                    mTimePicker.currentMinute * TIME_PICKER_INTERVAL
+                )
+                BUTTON_NEGATIVE -> cancel()
+            }
+        }
+    }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         try {
-            val classForid = Class.forName("com.android.internal.R\$id")
-            val timePickerField: Field = classForid.getField("timePicker")
-            mTimePicker = findViewById(timePickerField.getInt(null))
-            val minuteField: Field = classForid.getField("minute")
-            val hourField: Field = classForid.getField("hour")
-            val minuteSpinner = mTimePicker.findViewById(minuteField.getInt(null)) as NumberPicker
-            val mHourSpinner = mTimePicker.findViewById(hourField.getInt(null)) as NumberPicker
+            mTimePicker = findViewById(
+                Resources.getSystem().getIdentifier(
+                    "timePicker",
+                    "id",
+                    "android"
+                )
+            )
+
+            val minuteSpinner = mTimePicker.findViewById(
+                Resources.getSystem().getIdentifier(
+                    "minute",
+                    "id",
+                    "android"
+                )
+            ) as NumberPicker
+
+            val mHourSpinner = mTimePicker.findViewById(
+                Resources.getSystem().getIdentifier(
+                    "hour",
+                    "id",
+                    "android"
+                )
+            ) as NumberPicker
 
             minuteSpinner.minValue = 0
             minuteSpinner.maxValue = 60 / TIME_PICKER_INTERVAL - 1

@@ -136,6 +136,7 @@ class SchedulingExaminationFragment : Fragment() {
         binding.timePicker.setOnClickListener {
             val hour: Int = calendar.get(Calendar.HOUR_OF_DAY)
             val minute: Int = calendar.get(Calendar.MINUTE)
+
             val timePicker = ExaminationTimer(
                 context, { _, selectedHour, selectedMinute ->
                     calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
