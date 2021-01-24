@@ -14,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import io.kommunicate.Kommunicate
 import vukan.com.euprava.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), DrawerNavigation, ToastListener {
@@ -26,9 +27,10 @@ class MainActivity : AppCompatActivity(), DrawerNavigation, ToastListener {
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
         val navController = findNavController(R.id.nav_host_fragment)
+        Kommunicate.init(this, "16a9eb6fb97a09addd0e2b227221be0a6")
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.nav_home, R.id.nav_doctor, R.id.nav_help),
+            setOf(R.id.nav_home, R.id.nav_doctor, R.id.nav_bot, R.id.nav_help),
             binding.drawerLayout
         )
 

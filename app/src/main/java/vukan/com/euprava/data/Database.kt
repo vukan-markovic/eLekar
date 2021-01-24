@@ -15,6 +15,18 @@ import kotlin.reflect.KFunction1
 class Database {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
+    fun sendMessage(doctorID: String, message: String) {
+//        firestore.collection("users").add()
+    }
+
+    fun examinationEmail(doctorID: String, message: String) {
+
+    }
+
+    fun cancelEmail(doctorID: String, message: String) {
+
+    }
+
     fun addUser(userID: String, lboBzk: Array<String>) {
         val doc = firestore.collection("users").document(userID)
 

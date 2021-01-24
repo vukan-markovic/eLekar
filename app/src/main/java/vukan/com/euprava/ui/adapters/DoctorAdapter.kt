@@ -47,6 +47,12 @@ class DoctorAdapter(listener: DoctorItemClickListener, private val context: Cont
             action.doctorId = doctors[position].doctorID
             Navigation.findNavController(it).navigate(action)
         }
+
+        holder.viewBinding.sendMessage.setOnClickListener {
+            val action = ChosenDoctorFragmentDirections.actionNavDoctorToNavSchedulingExamination()
+            action.doctorId = doctors[position].doctorID
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
