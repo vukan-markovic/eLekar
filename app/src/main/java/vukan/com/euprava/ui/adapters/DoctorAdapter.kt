@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import vukan.com.euprava.R
 import vukan.com.euprava.data.model.Doctor
 import vukan.com.euprava.databinding.ChosenDoctorItemBinding
@@ -49,10 +50,14 @@ class DoctorAdapter(listener: DoctorItemClickListener, private val context: Cont
         }
 
         holder.viewBinding.sendMessage.setOnClickListener {
-            val action = ChosenDoctorFragmentDirections.actionNavDoctorToNavSchedulingExamination()
+            val action = ChosenDoctorFragmentDirections.actionNavDoctorToNavEmailDoctor()
             action.doctorId = doctors[position].doctorID
             Navigation.findNavController(it).navigate(action)
         }
+
+        if (FirebaseAuth.getInstance().currentUser?.email == null)
+            holder.viewBinding.sendMessage.visibility = View.GONE
+        else holder.viewBinding.sendMessage.visibility = View.VISIBLE
     }
 
     override fun getItemCount(): Int {

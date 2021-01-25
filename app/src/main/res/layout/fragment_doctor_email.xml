@@ -20,7 +20,7 @@
     <EditText
         android:id="@+id/message_text"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="200dp"
         android:layout_margin="8dp"
         android:autofillHints="@string/enter_message"
         android:gravity="top|start"
@@ -39,6 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:clickable="false"
+        android:enabled="false"
         android:text="@string/send_message"
         android:textColor="@color/white"
         app:backgroundTint="@color/teal_700"

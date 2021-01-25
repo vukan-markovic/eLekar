@@ -6,25 +6,20 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
-import vukan.com.euprava.data.model.Doctor
-import vukan.com.euprava.data.model.Examination
-import vukan.com.euprava.data.model.Institution
-import vukan.com.euprava.data.model.User
+import vukan.com.euprava.data.model.*
 import kotlin.reflect.KFunction1
 
 class Database {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun sendMessage(doctorID: String, message: String) {
-//        firestore.collection("users").add()
-    }
-
-    fun examinationEmail(doctorID: String, message: String) {
-
-    }
-
-    fun cancelEmail(doctorID: String, message: String) {
-
+    fun sendMessage(doctorName: String, lbo: String, message: String, email: String) {
+        firestore.collection("mail").add(
+            Mail(
+                "vukan.markovic@uns.ac.rs", email, Message(
+                    "Za: $doctorName, lbo: $lbo", message
+                )
+            )
+        )
     }
 
     fun addUser(userID: String, lboBzk: Array<String>) {

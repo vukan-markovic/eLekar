@@ -12,14 +12,6 @@
         tools:layout="@layout/fragment_home">
 
         <action
-            android:id="@+id/action_nav_home_to_nav_scheduling_examination"
-            app:destination="@id/nav_scheduling_examination"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-
-        <action
             android:id="@+id/action_nav_home_to_nav_login_lbo"
             app:destination="@id/nav_login_lbo"
             app:enterAnim="@anim/nav_default_enter_anim"
