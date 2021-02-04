@@ -17,7 +17,7 @@
         <item
             android:id="@+id/nav_bot"
             android:icon="@drawable/ic_chat"
-            android:title="@string/eSavetnik" />
+            android:title="@string/covid_19_bot" />
 
         <item
             android:id="@+id/nav_help"

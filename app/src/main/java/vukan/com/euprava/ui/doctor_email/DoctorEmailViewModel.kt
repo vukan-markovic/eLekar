@@ -35,9 +35,10 @@ class DoctorEmailViewModel : ViewModel() {
             _form.value = EmailState(isDataValid = true)
     }
 
-    fun sendMessage(doctorName: String, lbo: String, message: String) {
+    fun sendMessage(doctorName: String, doctorEmail: String, lbo: String, message: String) {
         repo.sendMessage(
             doctorName,
+            doctorEmail,
             lbo,
             message,
             FirebaseAuth.getInstance().currentUser?.email.toString()

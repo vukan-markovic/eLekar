@@ -12,10 +12,16 @@ import kotlin.reflect.KFunction1
 class Database {
     private val firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
 
-    fun sendMessage(doctorName: String, lbo: String, message: String, email: String) {
+    fun sendMessage(
+        doctorName: String,
+        emailTo: String,
+        lbo: String,
+        message: String,
+        emailFrom: String
+    ) {
         firestore.collection("mail").add(
             Mail(
-                "vukan.markovic@uns.ac.rs", email, Message(
+                emailTo, emailFrom, Message(
                     "Za: $doctorName, lbo: $lbo", message
                 )
             )
@@ -132,6 +138,7 @@ class Database {
                                 name = document.getString("name").toString(),
                                 surname = document.getString("surname").toString(),
                                 specialization = document.getString("specialization").toString(),
+                                mail = document.getString("mail").toString(),
                                 institutionID = document.getString("institutionID").toString()
                             )
                         )
@@ -159,6 +166,7 @@ class Database {
                                 name = document.getString("name").toString(),
                                 surname = document.getString("surname").toString(),
                                 specialization = document.getString("specialization").toString(),
+                                mail = document.getString("mail").toString(),
                                 institutionID = document.getString("institutionID").toString()
                             )
                         )

@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/nav_bot"
         android:name="vukan.com.euprava.ui.bot.BotFragment"
-        android:label="@string/eSavetnik"
+        android:label="@string/covid_19_bot"
         tools:layout="@layout/fragment_bot" />
 
     <fragment

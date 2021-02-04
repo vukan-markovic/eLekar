@@ -5,5 +5,6 @@ data class Doctor(
     val name: String,
     val surname: String,
     val specialization: String,
+    val mail: String,
     val institutionID: String
 )

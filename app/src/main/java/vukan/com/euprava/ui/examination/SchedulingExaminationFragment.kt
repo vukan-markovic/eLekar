@@ -55,7 +55,8 @@ class SchedulingExaminationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DrawerNavigation).setDrawerEnabled(true)
+        (activity as DrawerNavigation).setDrawerEnabled(false)
+        (activity as DrawerNavigation).setIcon()
         val doctorID = SchedulingExaminationFragmentArgs.fromBundle(requireArguments()).doctorId
 
         schedulingExaminationViewModel.getDoctorExaminations(doctorID)

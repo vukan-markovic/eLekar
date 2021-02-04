@@ -19,6 +19,7 @@ class DoctorEmailFragment : Fragment() {
     private lateinit var binding: FragmentDoctorEmailBinding
     private var isDataValid: Boolean = false
     private var doctorName: String = ""
+    private var doctorEmail: String = ""
     private var lbo: String = ""
 
     override fun onResume() {
@@ -44,11 +45,13 @@ class DoctorEmailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as DrawerNavigation).setDrawerEnabled(true)
+        (activity as DrawerNavigation).setDrawerEnabled(false)
+        (activity as DrawerNavigation).setIcon()
 
         doctorEmailViewModel.getDoctor(DoctorEmailFragmentArgs.fromBundle(requireArguments()).doctorId)
             .observe(viewLifecycleOwner) { doctor ->
                 doctorName = getString(R.string.doctor_name_surname, doctor.name, doctor.surname)
+                doctorEmail = doctor.mail
                 binding.doctorName.text = doctorName
             }
 
@@ -66,7 +69,12 @@ class DoctorEmailFragment : Fragment() {
             })
 
         binding.send.setOnClickListener {
-            doctorEmailViewModel.sendMessage(doctorName, lbo, binding.messageText.text.toString())
+            doctorEmailViewModel.sendMessage(
+                doctorName,
+                doctorEmail,
+                lbo,
+                binding.messageText.text.toString()
+            )
             (activity as ToastListener).show("Poruka je poslata!")
             findNavController().navigate(
                 DoctorEmailFragmentDirections.actionNavEmailDoctorToNavHome()

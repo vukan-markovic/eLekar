@@ -18,8 +18,14 @@ class Repository {
     private val doctors: MutableLiveData<List<Doctor>> = MutableLiveData()
     private val institution: MutableLiveData<Institution> = MutableLiveData()
 
-    fun sendMessage(doctorName: String, lbo: String, message: String, email: String) {
-        database.sendMessage(doctorName, lbo, message, email)
+    fun sendMessage(
+        doctorName: String,
+        emailTo: String,
+        lbo: String,
+        message: String,
+        email: String
+    ) {
+        database.sendMessage(doctorName, emailTo, lbo, message, email)
     }
 
     fun addUser(lboBzk: Array<String>) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.doctor_email.DoctorEmailFragment">
+    tools:context=".ui.bot.BotFragment">
 
     <TextView
         android:id="@+id/bot_help"
@@ -13,7 +13,7 @@
         android:layout_margin="8dp"
         android:justificationMode="inter_word"
         android:padding="8dp"
-        android:text="OVDE CE SE NALAZITI NEKO UPUSTVO za eSavetnika"
+        android:text="@string/bot_text"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="Pokrenite savetnika"
+        android:text="@string/start_bot"
         android:textColor="@color/white"
         app:backgroundTint="@color/teal_700"
         app:layout_constraintBottom_toBottomOf="parent"

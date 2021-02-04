@@ -28,7 +28,7 @@ class BotFragment : Fragment() {
 
         binding.start.setOnClickListener {
             KmChatBuilder(context)
-                .setChatName("eSavetnik")
+                .setChatName("COVID-19 bot")
                 .setBotIds(botList)
                 .launchChat(object : KmCallback {
                     override fun onSuccess(message: Any) {}
