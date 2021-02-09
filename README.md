@@ -1,4 +1,4 @@
-# eUprava
+# eLekar
 
 eLekar mobilna aplikacija omogućava zakazivanje pregleda kod izabranog lekara, otkazivanje istih, kao i slanje poruke lekaru. Poseduje i ugrađenog bota koji može pružiti osnovne informacije o zaraznoj bolesti COVID-19. Za prijavljivanje na aplikaciju je potrebno uneti svoj LBO i BZK a nakon toga se ulogovati putem imejla ili broja telefona.
 
