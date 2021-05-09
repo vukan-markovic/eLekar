@@ -1,6 +1,6 @@
 # eLekar
 
-eLekar mobilna aplikacija omogućava zakazivanje pregleda kod izabranog lekara, otkazivanje istih, kao i slanje poruke lekaru. Poseduje i ugrađenog bota koji može pružiti osnovne informacije o zaraznoj bolesti COVID-19. Za prijavljivanje na aplikaciju je potrebno uneti svoj LBO i BZK a nakon toga se ulogovati putem imejla ili broja telefona.
+The eLekar mobile application allows you to schedule an appointment with the selected doctor, cancel them, as well as send a message to the doctor. It also has a built-in bot that can provide basic information about the infectious disease COVID-19. To log in to the application, you need to enter your LBO and BZK and then log in via email or phone number.
 
 ![](https://i.ibb.co/p3vBrhz/Hvatanje-od-ecrans-20210209-222318.png)
 ![](https://i.ibb.co/nsXyvwr/Hvatanje-od-ecrans-20210209-222334.png)
